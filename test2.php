@@ -23,19 +23,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $result = mysqli_query($conn, $sql);
         $count = mysqli_num_rows($result);
         while ($TitleRow = mysqli_fetch_array($result)) {
-            $tlt = $TitleRow[1];
-            echo "<a href=https://www.rbeiset.com/packageexam/?examid=>$tlt</a>";
+            $titl = $TitleRow[1]."|".$TitleRow[0];
+            $IdRow=substr($titl,strpos($titl, '|', 0)+1,strlen($titl));
+            echo "<a href=https://www.rbeiset.com/packageexam/?examid=$IdRow>$titl</a>";
             echo "<br><br>";
         }
         exit();
-        // $conn->close();
-        // $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
-        // if()
-        $sql = "SELECT * FROM `rb_studentexam_tb` WHERE title='$some'";
-        $result = mysqli_query($conn, $sql);
-        $count = mysqli_num_rows($result);
-        $IdRow = mysqli_fetch_array($result);
-        echo $IdRow[0];
+        $conn->close();
+        $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+        // if(a)
+        // $sql = "SELECT * FROM `rb_studentexam_tb` WHERE title='$some'";
+        // $result = mysqli_query($conn, $sql);
+        // $count = mysqli_num_rows($result);
+        // $IdRow = mysqli_fetch_array($result);
+        // echo $IdRow[0];
         ?>
     </form>
 </body>

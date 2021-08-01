@@ -66,8 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             echo "arpan";
             if ($count == 1) {
                 $idresult = $row[0];
-                echo $idresult;
-                echo '';
+                // echo $idresult;
                 // return $idresult;
             }
         }

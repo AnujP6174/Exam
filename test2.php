@@ -21,3 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
+    // $row=mysqli_fetch_array($result);
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<a href=https://www.rbeiset.com/packageexam/?examid=>$row[1]</a>";
+        // echo $row[1];
+        echo "<br>";
+    }
+    ?>
+</body>
+</html>

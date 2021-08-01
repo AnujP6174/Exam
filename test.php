@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             }
             ?>
         </select>
+    </form>
         <!-- <button>Submit</button> -->
 
 
@@ -63,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $result = mysqli_query($conn, $sql);
             $count = mysqli_num_rows($result);
             $row = mysqli_fetch_array($result);
-            echo "arpan";
+            // echo "arpan";
             if ($count == 1) {
                 $idresult = $row[0];
                 // echo $idresult;
@@ -74,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         // }
         ?>
         <a name="submit" href="https://www.rbeiset.com/packageexam/?examid=".$PID>Submit</a>'
-    </form>
+    <!-- </form> -->
 </body>
 
 </html>

@@ -40,7 +40,7 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
         <a href="report.php"><i class="fas fa-tasks"></i><span>Progress Report</span></a>
         <a href="about.php"><i class="fas fa-info-circle"></i><span>About You</span></a>
         <a href="https://studde.com/"><i class="fas fa-video"></i><span>Lectures</span></a>
-        <a href="test.php"><i class="fas fa-graduation-cap"></i><span>Test Panel</span></a>
+        <a href="test2.php"><i class="fas fa-graduation-cap"></i><span>Test Panel</span></a>
         <a href="courses.php"><i class="fas fa-university"></i><span>Courses</span></a>
         <a href="login.php"><i class="fas fa-sign-out-alt"></i></i><span>Logout</span></a>
     </div>

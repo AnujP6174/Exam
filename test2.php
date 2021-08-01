@@ -22,12 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
         $result = mysqli_query($conn, $sql);
         $count = mysqli_num_rows($result);
-        while ($row = mysqli_fetch_array($result)) {
-            echo "<a href=https://www.rbeiset.com/packageexam/?examid=>$row[1]</a>";
-            $some = $row[1];
+        while ($TitleRow = mysqli_fetch_array($result)) {
+            echo "<a href=https://www.rbeiset.com/packageexam/?examid=>$TitleRow[1]</a>";
+            $some = $TitleRow[1];
             echo "<br>";
         }
-
+        $sql = "SELECT * FROM `rb_studentexam_tb` WHERE title='$some'";
+        $result = mysqli_query($conn, $sql);
+        $count = mysqli_num_rows($result);
+        $IdRow = mysqli_fetch_array($result);
+        echo $IdRow[0];
         ?>
     </form>
 </body>

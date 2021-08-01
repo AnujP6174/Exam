@@ -42,39 +42,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ?>
         </select>
     </form>
-        <!-- <button>Submit</button> -->
+    <!-- <button>Submit</button> -->
 
 
-        <?php
-        // $PID = PaperId();
-        // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        // $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+    <?php
+    // $PID = PaperId();
+    // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    // $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+    // exit();
+    // $PID = 5454546;
+    // echo 'https://www.rbeiset.com/packageexam/?examid=' . $PID;
+    // function PaperId()
+    // {
+    echo "ap";
+    $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+    if (isset($_GET['submit'])) {
+        $selval = $_GET['combobox'];
+        echo $selval;
         // exit();
-        // $PID = 5454546;
-        // echo 'https://www.rbeiset.com/packageexam/?examid=' . $PID;
-        // function PaperId()
-        // {
-        echo "ap";
-        $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
-        if (isset($_GET['submit'])) {
-            $selval = $_GET['combobox'];
-            echo $selval;
-            // exit();
-            $sql = "SELECT * FROM `rb_studentexam_tb` WHERE title='$selval'";
-            $result = mysqli_query($conn, $sql);
-            $count = mysqli_num_rows($result);
-            $row = mysqli_fetch_array($result);
-            // echo "arpan";
-            if ($count == 1) {
-                $idresult = $row[0];
-                // echo $idresult;
-                // return $idresult;
-            }
+        $sql = "SELECT * FROM `rb_studentexam_tb` WHERE title='$selval'";
+        $result = mysqli_query($conn, $sql);
+        $count = mysqli_num_rows($result);
+        $row = mysqli_fetch_array($result);
+        echo $row;
+        // echo "arpan";
+        if ($count == 1) {
+            $idresult = $row[0];
+            // echo $idresult;
+            // return $idresult;
         }
-        // }
-        // }
-        ?>
-        <a name="submit" href="https://www.rbeiset.com/packageexam/?examid=".$PID>Submit</a>'
+    }
+    // }
+    // }
+    ?>
+    <a name="submit" href="https://www.rbeiset.com/packageexam/?examid=" .$PID>Submit</a>'
     <!-- </form> -->
 </body>
 

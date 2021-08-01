@@ -23,10 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $result = mysqli_query($conn, $sql);
         $count = mysqli_num_rows($result);
         while ($TitleRow = mysqli_fetch_array($result)) {
-            echo "<a href=https://www.rbeiset.com/packageexam/?examid=>$TitleRow[1]</a>";
-            $some = $TitleRow[1];
-            echo "<br>";
+            $tlt = $TitleRow[1];
+            echo "<a href=https://www.rbeiset.com/packageexam/?examid=>$tlt</a>";
+            echo "<br><br>";
         }
+        exit();
+        // $conn->close();
+        // $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+        // if()
         $sql = "SELECT * FROM `rb_studentexam_tb` WHERE title='$some'";
         $result = mysqli_query($conn, $sql);
         $count = mysqli_num_rows($result);

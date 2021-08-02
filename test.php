@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             echo "<ul>
             <li><a href=https://www.rbeiset.com/packageexam/?examid=$IdRow>$titl</a></li>
             </ul>";
-            echo "<br><br>";
+            echo "<br>";
         }
         exit();
         $conn->close();

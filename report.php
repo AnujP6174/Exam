@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 <body>
     <div class="container my-4">
-        <table class="table table-bordered" id="myTable">
+        <table class="table table-dark table-striped table-hover table-bordered my-4" id="myTable">
             <thead class="table-success">
                 <tr>
                     <th scope="col">List of Test</th>

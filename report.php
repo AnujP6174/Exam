@@ -1,3 +1,6 @@
+<?php
+    // include('dash.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +13,3 @@
     
 </body>
 </html>
-<?php
-    include('dash.php');
-?>

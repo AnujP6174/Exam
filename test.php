@@ -47,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </nav>
     <!-- Navbar ends -->
-    <form class="container my-4" method="$_GET">
+    <form class="container my-4"
+    >
         <?php
         $ExmClss = $_SESSION['class'];
         $ExmClss = $ExmClss . '%';

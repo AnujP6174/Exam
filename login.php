@@ -46,6 +46,8 @@
               $TmpClss = $row['class'];
               $_SESSION['username'] = $UserN;
               $_SESSION['class'] = $TmpClss;
+              $user_id = $row[0];
+              $_SESSION['id'] = $user_id;
               header("Location:dashboard.php");
             } else {
               echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">

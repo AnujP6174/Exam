@@ -16,6 +16,11 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="dashboard.css">
     <title>DashBoard</title>
+    <!-- <style>
+        #logout{
+            
+        }
+    </style> -->
 </head>
 
 <body background="Material.jpg">
@@ -42,7 +47,7 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
         <a href="https://studde.com/"><i class="fas fa-video"></i><span>Lectures</span></a>
         <a href="test.php"><i class="fas fa-graduation-cap"></i><span>Test Panel</span></a>
         <a href="courses.php"><i class="fas fa-university"></i><span>Courses</span></a>
-        <a href="login.php"><i class="fas fa-sign-out-alt"></i></i><span>Logout</span></a>
+        <a href="logout.php"><i class="fas fa-sign-out-alt"></i></i><span>Logout</span></a>
     </div>
     <!-- Sidebar ends -->
 </body>

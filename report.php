@@ -35,20 +35,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </tr>
             </thead>
             <tbody>
+                <!-- List of Exams starts -->
                 <div class="container my-4">
                     <?php
-                    // $ExmClss = $_SESSION['class'];
-                    // $ExmClss = $ExmClss . '%';
-                    // $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
-                    // $result = mysqli_query($conn, $sql);
-                    // $count = mysqli_num_rows($result);
-                    // while ($TitleRow = mysqli_fetch_array($result)) {
-                    //     $titl = $TitleRow[1] . "_" . $TitleRow[0];
-                    //     $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
-                    //     echo "<tr><td><p>$titl</p></td></tr>";
-                    // }
+                    $ExmClss = $_SESSION['class'];
+                    $ExmClss = $ExmClss . '%';
+                    $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
+                    $result = mysqli_query($conn, $sql);
+                    $count = mysqli_num_rows($result);
+                    while ($TitleRow = mysqli_fetch_array($result)) {
+                        $titl = $TitleRow[1] . "_" . $TitleRow[0];
+                        $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
+                        echo "<tr class='table-primary'><td>$titl</td></tr>";
+                    }
                     ?>
                 </div>
+                <!-- List of Exams ends -->
+                
             </tbody>
         </table>
     </div>

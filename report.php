@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
@@ -24,10 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </head>
 
 <body>
-    <div class="container my-4">
-        <table class="table" id="mytable">
+    <div class="container my-5">
+        <table class="table table-striped table-hover table-bordered" id="myTable">
             <thead class="table-success">
-                <tr>
+                <tr style="text-align:center">
                     <th scope="col">List of Test</th>
                     <th scope="col">Exam Status</th>
                     <th scope="col">Score</th>
@@ -35,12 +35,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
+                <div class="container my-4">
+                    <?php
+                    $sql = "SELECT * FROM ``";
+                    $result = mysqli_query($conn, $sql);
+                    $sno = 0;
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $sno = $sno + 1;
+                        echo "<tr style='text-align:center'>
+                        <th >" . $sno . "</th>
+                        <td>" . $row['Title'] . "</td>
+                        <td>" . $row['Description'] . "</td>
+                        <td><button class='edit btn btn-sm btn-primary' id=" . $row['Sr.'] . ">Edit</button> <button class='delete btn btn-sm btn-secondary' id=d" . $row['Sr.'] . ">Delete</button>
+                        </tr>";
+                    }
+                    ?>
+                </div>
             </tbody>
         </table>
     </div>

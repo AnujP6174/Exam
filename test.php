@@ -62,17 +62,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </ul>";
             echo "<br>";
         }
-        exit();
-        $conn->close();
-        $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
-        // if(a)
-        // $sql = "SELECT * FROM `rb_studentexam_tb` WHERE title='$some'";
-        // $result = mysqli_query($conn, $sql);
-        // $count = mysqli_num_rows($result);
-        // $IdRow = mysqli_fetch_array($result);
-        // echo $IdRow[0];
         ?>
     </form>
 </body>
 
 </html>
+        <!-- exit();
+        $conn->close();
+        $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+        if(a)
+        $sql = "SELECT * FROM `rb_studentexam_tb` WHERE title='$some'";
+        $result = mysqli_query($conn, $sql);
+        $count = mysqli_num_rows($result);
+        $IdRow = mysqli_fetch_array($result);
+        echo $IdRow[0]; -->

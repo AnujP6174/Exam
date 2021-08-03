@@ -37,55 +37,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <tbody>
                 <!-- List of Exams starts -->
                 <?php
-                $ExmClss = $_SESSION['class'];
-                $ExmClss = $ExmClss . '%';
-                $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
-                $result = mysqli_query($conn, $sql);
-                $count = mysqli_num_rows($result);
-                while ($TitleRow = mysqli_fetch_array($result)) {
-                    $titl = $TitleRow[1] . "_" . $TitleRow[0];
-                    $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
-                    echo "<tr class='table-primary'><td>$titl</td>";
-                }
-                ?>
-                <!-- List of Exams ends -->
-                <!-- Score starts -->
-                <?php
-                $user_id = $_SESSION['id'];
-                $exam_id = 5454546;
-                //  $marks_array = Array();
-                $ExmClss = $_SESSION['class'];
-                $ExmClss = $ExmClss . '%';
-                $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
-                $result1 = mysqli_query($conn, $sql);
-                $count1 = mysqli_num_rows($result1);
-                $exam_id_array = Array();
-                while ($TitleRow = mysqli_fetch_array($result1)) {
-                    $titl = $TitleRow[1] . "_" . $TitleRow[0];
-                    $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
-                    array_push($exam_id_array,$IdRow);    
-                }
-                
                 foreach ($exam_id_array as $value) {
+                    $user_id = $_SESSION['id'];
+                    $ExmClss = $_SESSION['class'];
+                    $ExmClss = $ExmClss . '%';
+                    $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
                     $marks_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE studentid='$user_id' AND testid='$value'";
-                    $result = mysqli_query($conn, $marks_query);
-                    $count = mysqli_num_rows($result);
+                    $result1 = mysqli_query($conn, $marks_query);
+                    $count1 = mysqli_num_rows($result1);
                     $total_marks = 0;
-                    while ($row = mysqli_fetch_array($result)) {
-                    $total_marks += $row[6];
+                    $result = mysqli_query($conn, $sql);
+                    $count = mysqli_num_rows($result);
+                    $exam_id_array = array();
+                    while ($row = mysqli_fetch_array($result1)) {
+                        $total_marks += $row[6];
                     }
-                    // echo $total_marks;
-                    echo "<td>$total_marks</td></tr>";
+                    while ($TitleRow = mysqli_fetch_array($result)) {
+                        $titl = $TitleRow[1] . "_" . $TitleRow[0];
+                        $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
+                        array_push($exam_id_array, $IdRow);
+                        echo "<tr class='table-primary'><td>$titl</td>
+                        <td>Given</td></tr>
+                        <td>$total_marks</td></tr>";
+                    }
                 }
-
-                // $marks_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE studentid='$user_id' AND testid='$IdRow'";
-                // $result = mysqli_query($conn, $marks_query);
-                // $count = mysqli_num_rows($result);
-                // $total_marks = 0;
-                // while ($row = mysqli_fetch_array($result)) {
-                //     $total_marks += $row[6];
+                foreach ($exam_id_array as $value) {
+                }
+                // <!-- List of Exams ends -->
+                // <!-- Score starts -->
+                // $marks_array = array();
+                // $ExmClss = $_SESSION['class'];
+                // $ExmClss = $ExmClss . '%';
+                // $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
+                // $result1 = mysqli_query($conn, $sql);
+                // $count1 = mysqli_num_rows($result1);
+                // $exam_id_array = array();
+                // while ($TitleRow = mysqli_fetch_array($result1)) {
+                //     $titl = $TitleRow[1] . "_" . $TitleRow[0];
+                //     $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
+                //     array_push($exam_id_array, $IdRow);
                 // }
-                // echo $total_marks;
+
                 ?>
                 <!-- Score ends -->
             </tbody>
@@ -97,39 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $('#myTable').DataTable();
         });
     </script>
-    <!-- </div> -->
     <!-- Datatables javascript ends -->
 </body>
 
 </html>
-<!-- <div class="container my-4">
-                <table class="table table-dark table-striped table-hover table-bordered my-4" id="myTable">
-                    <thead class="table-success">
-                        <tr style="text-align:center">
-                            <th scope="col">List of Test</th>
-                            <th scope="col">Exam Status</th>
-                            <th scope="col">Score</th>
-                            <th scope="col">View Wrong Answers</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                        </tr>
-                    </tbody>
-                </table> -->

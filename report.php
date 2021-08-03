@@ -37,18 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <tbody>
                 <div class="container my-4">
                     <?php
-                    $sql = "SELECT * FROM ``";
-                    $result = mysqli_query($conn, $sql);
-                    $sno = 0;
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $sno = $sno + 1;
-                        echo "<tr style='text-align:center'>
-                        <th >" . $sno . "</th>
-                        <td>" . $row['Title'] . "</td>
-                        <td>" . $row['Description'] . "</td>
-                        <td><button class='edit btn btn-sm btn-primary' id=" . $row['Sr.'] . ">Edit</button> <button class='delete btn btn-sm btn-secondary' id=d" . $row['Sr.'] . ">Delete</button>
-                        </tr>";
-                    }
+                    // $ExmClss = $_SESSION['class'];
+                    // $ExmClss = $ExmClss . '%';
+                    // $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
+                    // $result = mysqli_query($conn, $sql);
+                    // $count = mysqli_num_rows($result);
+                    // while ($TitleRow = mysqli_fetch_array($result)) {
+                    //     $titl = $TitleRow[1] . "_" . $TitleRow[0];
+                    //     $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
+                    //     echo "<tr><td><p>$titl</p></td></tr>";
+                    // }
                     ?>
                 </div>
             </tbody>

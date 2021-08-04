@@ -35,48 +35,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </tr>
             </thead>
             <tbody>
-                <!-- List of Exams starts -->
                 <?php
-                foreach ($exam_id_array as $value) {
-                    $user_id = $_SESSION['id'];
-                    $ExmClss = $_SESSION['class'];
-                    $ExmClss = $ExmClss . '%';
-                    $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
-                    $marks_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE studentid='$user_id' AND testid='$value'";
-                    $result1 = mysqli_query($conn, $marks_query);
-                    $count1 = mysqli_num_rows($result1);
-                    $total_marks = 0;
-                    $result = mysqli_query($conn, $sql);
-                    $count = mysqli_num_rows($result);
-                    $exam_id_array = array();
-                    while ($row = mysqli_fetch_array($result1)) {
-                        $total_marks += $row[6];
-                    }
-                    while ($TitleRow = mysqli_fetch_array($result)) {
-                        $titl = $TitleRow[1] . "_" . $TitleRow[0];
-                        $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
-                        array_push($exam_id_array, $IdRow);
-                        echo "<tr class='table-primary'><td>$titl</td>
-                        <td>Given</td></tr>
-                        <td>$total_marks</td></tr>";
-                    }
+                // List of Exams starts
+                $user_id = $_SESSION['id'];
+                $ExmClss = $_SESSION['class'];
+                $ExmClss = $ExmClss . '%';
+                $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
+                $result = mysqli_query($conn, $sql);
+                $count = mysqli_num_rows($result);
+                $exam_id_array = array();
+                $value=$exam_id_array;
+                $marks_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE studentid='$user_id' AND testid='$value'";
+                $result1 = mysqli_query($conn, $marks_query);
+                $count1 = mysqli_num_rows($result1);
+                $total_marks = 0;
+                while ($row = mysqli_fetch_array($result1)) {
+                    $total_marks += $row[6];
                 }
-                foreach ($exam_id_array as $value) {
+                while ($TitleRow = mysqli_fetch_array($result)) {
+                    $titl = $TitleRow[1] . "_" . $TitleRow[0];
+                    $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
+                    array_push($exam_id_array, $IdRow);
+                    echo "<tr class='table-primary'><td>$titl</td>
+                    <td>Given</td>
+                    <td>$total_marks</td></tr>";
                 }
                 // <!-- List of Exams ends -->
                 // <!-- Score starts -->
-                // $marks_array = array();
-                // $ExmClss = $_SESSION['class'];
-                // $ExmClss = $ExmClss . '%';
-                // $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
-                // $result1 = mysqli_query($conn, $sql);
-                // $count1 = mysqli_num_rows($result1);
-                // $exam_id_array = array();
-                // while ($TitleRow = mysqli_fetch_array($result1)) {
-                //     $titl = $TitleRow[1] . "_" . $TitleRow[0];
-                //     $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
-                //     array_push($exam_id_array, $IdRow);
-                // }
+
+                foreach ($exam_id_array as $value) {
+                    while ($TitleRow = mysqli_fetch_array($result1)) {
+                        $titl = $TitleRow[1] . "_" . $TitleRow[0];
+                        $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
+                        array_push($exam_id_array, $IdRow);
+                    }
+                }
 
                 ?>
                 <!-- Score ends -->

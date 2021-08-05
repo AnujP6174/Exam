@@ -20,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+    <script	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <title>Progress Report</title>
     <style>
         body {
@@ -59,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <table class="table table-striped table-hover table-bordered" id="myTable">
             <thead class="table-dark">
                 <tr style="text-align:center">
+                    <th scope="col">Sr. No.</th>
                     <th scope="col">List of Test</th>
                     <th scope="col">Exam Status</th>
                     <th scope="col">Score</th>
@@ -68,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <tbody>
                 <?php
                 // List of Exams starts
-                $user_id = $_SESSION['id'];
+                $uid = $_SESSION['id'];
                 $ExmClss = $_SESSION['class'];
                 $ExmClss = $ExmClss . '%';
                 $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
@@ -77,13 +80,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $exam_id_array = array();
                 $exam_marks = array();
                 $exam_title = array();
+                $status_array=array();
+                $image=array();
 
-                while ($TitleRow = mysqli_fetch_array($result)) {
+                // Status query
+                
+                
+                // Status query ends
+                // ------------------------------------
+                // Exam title fetch starts
+                while ($TitleRow = mysqli_fetch_array($result)) {       
                     $titl = $TitleRow[1] . "_" . $TitleRow[0];
                     $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
                     array_push($exam_id_array, $IdRow);
                     array_push($exam_title, $titl);
                 }
+                // Exam title fetch ends
+                // ------------------------------------
+                // 
+                $status_query="SELECT * FROM `rb_studentexamresult_tb` WHERE status='incorrect' AND studentid=$uid ORDER BY questionid";
+                $status_result=mysqli_query($conn,$status_query);
+                $status_count=mysqli_num_rows($status_result);
+                
+                // image part start
+                function second_query($image2,$image3){
+                    $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+                    $image_query="SELECT * FROM `rb_studentexamqus_tb` WHERE testid=$image2 AND id=$image3";
+                    $img_resu=mysqli_query($conn,$image_query) or die( mysqli_error($conn));
+                    $image_count=mysqli_num_rows($img_resu);
+                    $image_row=mysqli_fetch_array($img_resu);
+                    if($image_count==1){
+                    echo nl2br("<b>Question:</b>\n\n<img src='$image_row[9]' width=75% height=75%>\n\n");
+                    // echo nl2br("Correct Answer is:");
+                    echo nl2br("<b>Solution:\n\n<img src='$image_row[3]' width=75% height=75%>\n\n");
+                    }
+                    else{
+                        echo "No Data Found";
+                    }
+                    // echo "<br>";
+                }
+
+                while($image=mysqli_fetch_array($status_result)){
+                    second_query($image[2],$image[3]);
+                }
+                // image part ends
 
                 foreach ($exam_id_array as $value) {
                     $user_id = $_SESSION['id'];
@@ -97,18 +137,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     $percent_marks = ($total_marks * 100) / 80;
                     array_push($exam_marks, $percent_marks);
                 }
+
                 for ($i = 0; $i < count($exam_id_array); $i++) {
-                    echo "<tr class='table-success' style='text-align:center'><td>$exam_title[$i]</td>";
+                    echo "<tr class='table-success' style='text-align:center'><td>$i</td>";
+                    echo "<td>$exam_title[$i]</td>";
                     if ($exam_marks[$i] > 0) {
                         echo "<td> Given </td>";
                     } else {
                         echo "<td> Exam Pending </td>";
                     }
                     echo "<td>$exam_marks[$i]%</td>";
-                    echo "<td><a href='https://www.rbeiset.com/packageexam/result.php?studentid=2&testid=$exam_id_array[$i]&device=desktop'><input type='button' value='View Solution'></a></td></tr>";
+                    echo "<td><a href='https://www.rbeiset.com/packageexam/result.php?studentid=$user_id&testid=$exam_id_array[$i]&device=desktop'><input type='button' value='View Solution'></a></td></tr>";
                 }
                 ?>
                 <!-- Score ends -->
+                <img src=""
             </tbody>
         </table>
     </div>

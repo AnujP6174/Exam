@@ -53,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <form class="container my-4"
     >
         <?php
+        $user_id= $_SESSION['id'];
         $ExmClss = $_SESSION['class'];
         $ExmClss = $ExmClss . '%';
         $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";

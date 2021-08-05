@@ -80,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $exam_id_array = array();
                 $exam_marks = array();
                 $exam_title = array();
-                $status_array=array();
-                $image=array();
+                // $status_array=array();
+                // $image=array();
 
                 // Status query
                 
@@ -98,31 +98,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 // Exam title fetch ends
                 // ------------------------------------
                 // 
-                $status_query="SELECT * FROM `rb_studentexamresult_tb` WHERE status='incorrect' AND studentid=$uid ORDER BY questionid";
-                $status_result=mysqli_query($conn,$status_query);
-                $status_count=mysqli_num_rows($status_result);
+                // $status_query="SELECT * FROM `rb_studentexamresult_tb` WHERE status='incorrect' AND studentid=$uid ORDER BY questionid";
+                // $status_result=mysqli_query($conn,$status_query);
+                // $status_count=mysqli_num_rows($status_result);
                 
-                // image part start
-                function second_query($image2,$image3){
-                    $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
-                    $image_query="SELECT * FROM `rb_studentexamqus_tb` WHERE testid=$image2 AND id=$image3";
-                    $img_resu=mysqli_query($conn,$image_query) or die( mysqli_error($conn));
-                    $image_count=mysqli_num_rows($img_resu);
-                    $image_row=mysqli_fetch_array($img_resu);
-                    if($image_count==1){
-                    echo nl2br("<b>Question:</b>\n\n<img src='$image_row[9]' width=75% height=75%>\n\n");
-                    // echo nl2br("Correct Answer is:");
-                    echo nl2br("<b>Solution:\n\n<img src='$image_row[3]' width=75% height=75%>\n\n");
-                    }
-                    else{
-                        echo "No Data Found";
-                    }
-                    // echo "<br>";
-                }
-
-                while($image=mysqli_fetch_array($status_result)){
-                    second_query($image[2],$image[3]);
-                }
+                // // image part start
+                // function second_query($image2,$image3){
+                //     $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+                //     $image_query="SELECT * FROM `rb_studentexamqus_tb` WHERE testid=$image2 AND id=$image3";
+                //     $img_resu=mysqli_query($conn,$image_query) or die( mysqli_error($conn));
+                //     $image_count=mysqli_num_rows($img_resu);
+                //     $image_row=mysqli_fetch_array($img_resu);
+                //     if($image_count==1){
+                //     echo nl2br("<b>Question:</b>\n\n<img src='$image_row[9]' width=75% height=75%>\n\n");
+                //     echo nl2br("<b>Correct Answer : <span style='color:white;text-transform:uppercase'>$image_row[14]</span>\n\n");
+                //     echo nl2br("Solution:\n\n<img src='$image_row[3]' width=75% height=75%>\n\n");
+                //     }
+                //     else{
+                //         echo "No Data Found";
+                //     }
+                //     // echo "<br>";
+                // }
+                // while($image=mysqli_fetch_array($status_result)){
+                //     second_query($image[2],$image[3]);
+                // }
                 // image part ends
 
                 foreach ($exam_id_array as $value) {
@@ -147,11 +146,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         echo "<td> Exam Pending </td>";
                     }
                     echo "<td>$exam_marks[$i]%</td>";
-                    echo "<td><a href='https://www.rbeiset.com/packageexam/result.php?studentid=$user_id&testid=$exam_id_array[$i]&device=desktop'><input type='button' value='View Solution'></a></td></tr>";
+                    echo "<td><a href='solution.php'><input type='button' value='View Solution'></a></td></tr>";
                 }
                 ?>
                 <!-- Score ends -->
-                <img src=""
             </tbody>
         </table>
     </div>

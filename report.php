@@ -21,9 +21,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <title>Progress Report</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #2980b9, #8e44ad);
+            background-attachment: fixed;
+        }
+
+        span {
+            color: #ff8080;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+        <div class="container-fluid">
+            <h3>RBE <span>INSTITUTE</span></h3>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+                <form class="d-flex" action="dashboard.php">
+                    <button class="btn btn-transparent" type="submit">Home</button>
+                </form>
+                <form action="login.php">
+                    <button class="btn btn-transparent" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar ends -->
     <div class="container my-5">
         <table class="table table-striped table-hover table-bordered" id="myTable">
             <thead class="table-success">
@@ -51,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     $titl = $TitleRow[1] . "_" . $TitleRow[0];
                     $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
                     array_push($exam_id_array, $IdRow);
-                    array_push($exam_title,$titl);
+                    array_push($exam_title, $titl);
                 }
 
                 foreach ($exam_id_array as $value) {
@@ -63,15 +93,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     while ($row = mysqli_fetch_array($result1)) {
                         $total_marks += $row[6];
                     }
-                    $percent_marks = ($total_marks*100)/80;
+                    $percent_marks = ($total_marks * 100) / 80;
                     array_push($exam_marks, $percent_marks);
                 }
                 for ($i = 0; $i < count($exam_id_array); $i++) {
                     echo "<tr style='text-align:center'><td>$exam_title[$i]</td>";
-                    if($exam_marks[$i]>0){
+                    if ($exam_marks[$i] > 0) {
                         echo "<td> Given </td>";
-                    }
-                    else{
+                    } else {
                         echo "<td> Exam Pending </td>";
                     }
                     echo "<td>$exam_marks[$i]%</td>";

@@ -23,6 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         a {
             color: black;
         }
+        span{
+            color: #ff8080;
+        }
     </style>
 </head>
 

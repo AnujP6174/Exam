@@ -67,14 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     array_push($exam_marks, $percent_marks);
                 }
                 for ($i = 0; $i < count($exam_id_array); $i++) {
-                    echo "<tr><td>$exam_title[$i]</td>";
+                    echo "<tr style='text-align:center'><td>$exam_title[$i]</td>";
                     if($exam_marks[$i]>0){
                         echo "<td> Given </td>";
                     }
                     else{
-                        echo "<td> Not Given </td>";
+                        echo "<td> Exam Pending </td>";
                     }
-                    echo "<td>$exam_marks[$i]%</td></tr>";
+                    echo "<td>$exam_marks[$i]%</td>";
+                    echo "<td><a href='https://www.rbeiset.com/packageexam/result.php?studentid=2&testid=$exam_id_array[$i]&device=desktop'><input type='button' value='View Solution'></a></td></tr>";
                 }
                 ?>
                 <!-- Score ends -->

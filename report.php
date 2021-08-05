@@ -54,9 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </nav>
     <!-- Navbar ends -->
-    <div class="container my-5">
+    <!-- Table start -->
+    <div class="container my-3">
         <table class="table table-striped table-hover table-bordered" id="myTable">
-            <thead class="table-success">
+            <thead class="table-dark">
                 <tr style="text-align:center">
                     <th scope="col">List of Test</th>
                     <th scope="col">Exam Status</th>
@@ -97,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     array_push($exam_marks, $percent_marks);
                 }
                 for ($i = 0; $i < count($exam_id_array); $i++) {
-                    echo "<tr style='text-align:center'><td>$exam_title[$i]</td>";
+                    echo "<tr class='table-success' style='text-align:center'><td>$exam_title[$i]</td>";
                     if ($exam_marks[$i] > 0) {
                         echo "<td> Given </td>";
                     } else {
@@ -111,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </tbody>
         </table>
     </div>
+    <!-- Table ends -->
     <!-- Datatables javascript start -->
     <script>
         $(document).ready(function() {

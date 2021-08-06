@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
     <title>Progress Report</title>
     <style>
         body {
@@ -59,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <table class="table table-striped table-hover table-bordered" id="myTable">
             <thead class="table-dark">
                 <tr style="text-align:center">
-                    <th scope="col">Sr. No.</th>
+                    <th scope="col">Serial No.</th>
                     <th scope="col">List of Test</th>
                     <th scope="col">Exam Status</th>
                     <th scope="col">Score</th>
@@ -75,12 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
+                $exam_serial_array = array();
                 $exam_id_array = array();
                 $exam_marks = array();
                 $exam_title = array();
-
-                // 
-                
+                $status_given = "Given";
+                $status_pending = "Exam Pending";
 
                 // ------------------------------------
                 // Exam title fetch starts
@@ -106,35 +107,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 }
 
                 for ($i = 0; $i < count($exam_id_array); $i++) {
+                    $i = $i + 1;
+                    array_push($exam_serial_array, $i);
                     echo "<tr class='table-success' style='text-align:center'><td>$i</td>";
+                    $i = $i - 1;
                     echo "<td>$exam_title[$i]</td>";
                     if ($exam_marks[$i] > 0) {
-                        echo "<td> Given </td>";
+                        echo "<td>$status_given</td>";
                     } else {
-                        echo "<td> Exam Pending </td>";
+                        echo "<td> $status_pending </td>";
                     }
                     echo "<td>$exam_marks[$i]%</td>";
                     echo "<td><a href='solution.php?testid=$exam_id_array[$i]'><input type='button' class='btn btn-success' id='butn' value='View Solution'></a></td></tr>";
                 }
                 ?>
+                <!-- <script>
+                    $(document).ready(function() {
+                        $('input[id="butn"]').attr('disabled', true);
+                        if ($(this).val == true) {
+                            $('input[id="butn"]').attr('disabled', false);
+                            document.getElementById("butn").style.color = "green";
+                            document.getElementById("butn").value = "View Solution";
+                        } else {
+                            $('input[id="butn"]').attr('disabled', true);
+                            document.getElementById("butn").style.color = "red";
+                            document.getElementById("butn").value = "Exam Pending";
+                        }
+                    });
+                </script> -->
                 <!-- Score ends -->
             </tbody>
         </table>
+        <center>
+            <input type="button" id="view_chart_btn" value="View Detailed Marks Graph">
+            <div id="column_material" style="width: 800px; height:500px; display:none;"></div>
+        </center>
     </div>
     <!-- Table ends -->
-    
-    <!-- <form action="solution.php" method="POST">
-        <script src="jquery.min.js"></script>
-        <script>
-            // $('.table tbody').on('click', '.btn', function() {
-            //     var currow = $(this).closest('tr');
-            //     var col1 = currow.find('td:eq(1)').text();
-            //     var p_id = col1.substr(col1.search('_') + 1, col1.length);
-            //     alert(p_id);
-            // })
-        </script>;
-    </form> -->
-
     <!-- Datatables javascript start -->
     <script>
         $(document).ready(function() {
@@ -142,6 +151,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         });
     </script>
     <!-- Datatables javascript ends -->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['bar']
+        });
+        google.charts.setOnLoadCallback(initialize);
+
+        function initialize() {
+            $("view_chart_btn").click(function() {
+                document.getElementById("view_chart_btn").style.display = "none";
+                document.getElementById("columnchart_material").style.display = "block";
+                drawChart();
+                document.getElementById("columnchart_material").scrollIntoView();
+            });
+        }
+        var serial = JSON.parse('<?php echo json_encode($exam_serial_array); ?>');
+        var Marks = JSON.parse('<?php echo json_encode($exam_marks); ?>');
+        console.log(serial);
+        console.log(Marks);
+
+        function drawChart() {
+            // create Datatable
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Exam Subject Serial.');
+            data.addColumn('number', 'Marks');
+
+            // load data
+            for (var i = 0; i < Marks.length; i++) {
+                var row = [serial[i], Marks[i]];
+                data.addRow(row);
+            }
+            var options = {
+                chart: {
+
+                }
+            };
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+        
+    </script>
 </body>
 
 </html>

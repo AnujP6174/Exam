@@ -80,8 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $exam_id_array = array();
                 $exam_marks = array();
                 $exam_title = array();
-                $status_given = "Given";
-                $status_pending = "Exam Pending";
 
                 // ------------------------------------
                 // Exam title fetch starts
@@ -113,12 +111,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     $i = $i - 1;
                     echo "<td>$exam_title[$i]</td>";
                     if ($exam_marks[$i] > 0) {
-                        echo "<td>$status_given</td>";
+                        echo "<td>Given</td>";
                     } else {
-                        echo "<td> $status_pending </td>";
+                        echo "<td> Exam Pending </td>";
                     }
                     echo "<td>$exam_marks[$i]%</td>";
-                    echo "<td><a href='solution.php?testid=$exam_id_array[$i]'><input type='button' class='btn btn-success' id='butn' value='View Solution'></a></td></tr>";
+                    if($exam_marks[$i] > 0){
+                        echo "<td><a href='solution.php?testid=$exam_id_array[$i]'><input type='button' class='btn btn-success' id='butn' value='View Solution'></a></td></tr>";
+                    }
+                    else{
+                        echo "<td>Exam Pending</td></tr>";
+                    }
                 }
                 ?>
                 <!-- <script>
@@ -139,8 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </tbody>
         </table>
         <center>
-            <input type="button" id="view_chart_btn" value="View Detailed Marks Graph">
-            <div id="column_material" style="width: 800px; height:500px; display:none;"></div>
+            <input type="button" class="btn btn-success" id="view_chart_btn" value="View Detailed Marks Graph">
+            <div id="columnchart_material" style="width: 800px; height:500px; display:none;"></div>
         </center>
     </div>
     <!-- Table ends -->
@@ -160,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         google.charts.setOnLoadCallback(initialize);
 
         function initialize() {
-            $("view_chart_btn").click(function() {
+            $("#view_chart_btn").click(function() {
                 document.getElementById("view_chart_btn").style.display = "none";
                 document.getElementById("columnchart_material").style.display = "block";
                 drawChart();
@@ -177,7 +180,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             var data = new google.visualization.DataTable();
             data.addColumn('number', 'Exam Subject Serial.');
             data.addColumn('number', 'Marks');
-
+            console.log("Data is : ");
+            console.log(data);
             // load data
             for (var i = 0; i < Marks.length; i++) {
                 var row = [serial[i], Marks[i]];
@@ -191,7 +195,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
             chart.draw(data, google.charts.Bar.convertOptions(options));
         }
-        
     </script>
 </body>
 

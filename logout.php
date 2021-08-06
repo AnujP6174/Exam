@@ -1,12 +1,10 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
-    session_unset();
+    session_start();
+    unset($_SESSION);
     session_destroy();
-    mysqli_close($conn);
-    setcookie('username', '', time() - 3600);
-    setcookie('password', '', time() - 3600);
-    header("Location:login.php");
+    session_write_close();
+    header('Location: /internship/login.php');
 }
 // exit();
 ?>

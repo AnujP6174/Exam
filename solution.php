@@ -88,19 +88,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $img_resu = mysqli_query($conn, $image_query) or die(mysqli_error($conn));
             $image_count = mysqli_num_rows($img_resu);
             $image_row = mysqli_fetch_array($img_resu);
-            if ($image_count == 1) {
+            if ($img_resu==TRUE) {
                 echo nl2br("<b>Question:</b>\n\n<img src='$image_row[9]' width=75% height=75%>\n\n");
                 echo nl2br("<b>Correct Answer : <span style='color:white;text-transform:uppercase'>$image_row[14]</span>\n\n");
                 echo nl2br("Solution:\n\n<img src='$image_row[3]' width=75% height=75%>\n\n");
             } else {
-                echo "No Data Found";
+                echo ("No Incorrect Answers found!");
             }
         }
         while ($image = mysqli_fetch_array($status_result)) {
             second_query($image[2], $image[3]);
         }
         // image part ends
-        // 
         ?>
     </div>
 </body>

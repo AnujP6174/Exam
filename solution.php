@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $exam_title = array();
         $status_array = array();
         $image = array();
+        $testid = $_GET['testid'];
 
         // ------------------------------------
         // Exam title fetch starts
@@ -75,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
         // Exam title fetch ends
         // ------------------------------------
-        $status_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE status='incorrect' AND studentid=$uid ORDER BY questionid";
+        $status_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE status='incorrect' AND testid=$testid AND studentid=$uid ORDER BY questionid";
         $status_result = mysqli_query($conn, $status_query);
         $status_count = mysqli_num_rows($status_result);
 

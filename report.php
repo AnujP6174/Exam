@@ -78,8 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $exam_id_array = array();
                 $exam_marks = array();
                 $exam_title = array();
-                // $status_array=array();
-                // $image=array();
+                
 
                 // ------------------------------------
                 // Exam title fetch starts
@@ -113,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         echo "<td> Exam Pending </td>";
                     }
                     echo "<td>$exam_marks[$i]%</td>";
-                    echo "<td><a href='solution.php'><input type='button' class='btn btn-success' id='butn' value='View Solution'></a></td></tr>";
+                    echo "<td><a href='solution.php?testid=$exam_id_array[$i]'><input type='button' class='btn btn-success' id='butn' value='View Solution'></a></td></tr>";
                 }
                 ?>
                 <!-- Score ends -->
@@ -121,17 +120,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </table>
     </div>
     <!-- Table ends -->
-    <form action="solution.php" method="POST">
+    
+    <!-- <form action="solution.php" method="POST">
         <script src="jquery.min.js"></script>
         <script>
-            $('.table tbody').on('click', '.btn', function() {
-                var currow = $(this).closest('tr');
-                var col1 = currow.find('td:eq(1)').text();
-                var p_id = col1.substr(col1.search('_') + 1, col1.length);
-                alert(p_id);
-            })
+            // $('.table tbody').on('click', '.btn', function() {
+            //     var currow = $(this).closest('tr');
+            //     var col1 = currow.find('td:eq(1)').text();
+            //     var p_id = col1.substr(col1.search('_') + 1, col1.length);
+            //     alert(p_id);
+            // })
         </script>;
-    </form>
+    </form> -->
+
     <!-- Datatables javascript start -->
     <script>
         $(document).ready(function() {

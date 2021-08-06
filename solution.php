@@ -65,10 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $status_array = array();
         $image = array();
 
-        // Status query
-
-
-        // Status query ends
         // ------------------------------------
         // Exam title fetch starts
         while ($TitleRow = mysqli_fetch_array($result)) {
@@ -79,13 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
         // Exam title fetch ends
         // ------------------------------------
-        // 
-        $status_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE status='incorrect' AND testid=$IdRow AND studentid=$uid ORDER BY questionid";
-        echo $IdRow;
-        exit();
+        $status_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE status='incorrect' AND studentid=$uid ORDER BY questionid";
         $status_result = mysqli_query($conn, $status_query);
         $status_count = mysqli_num_rows($status_result);
-        
+
         // image part start
         function second_query($image2, $image3)
         {
@@ -93,17 +86,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $image_query = "SELECT * FROM `rb_studentexamqus_tb` WHERE testid=$image2 AND id=$image3";
             $img_resu = mysqli_query($conn, $image_query) or die(mysqli_error($conn));
             $image_count = mysqli_num_rows($img_resu);
-            echo $image_count;
-            exit();
             $image_row = mysqli_fetch_array($img_resu);
             if ($image_count == 1) {
-                // echo nl2br("<b>Question:</b>\n\n<img src='$image_row[9]' width=75% height=75%>\n\n");
-                // echo nl2br("<b>Correct Answer : <span style='color:white;text-transform:uppercase'>$image_row[14]</span>\n\n");
-                // echo nl2br("Solution:\n\n<img src='$image_row[3]' width=75% height=75%>\n\n");
+                echo nl2br("<b>Question:</b>\n\n<img src='$image_row[9]' width=75% height=75%>\n\n");
+                echo nl2br("<b>Correct Answer : <span style='color:white;text-transform:uppercase'>$image_row[14]</span>\n\n");
+                echo nl2br("Solution:\n\n<img src='$image_row[3]' width=75% height=75%>\n\n");
             } else {
                 echo "No Data Found";
             }
-            // echo "<br>";
         }
         while ($image = mysqli_fetch_array($status_result)) {
             second_query($image[2], $image[3]);

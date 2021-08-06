@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
-    <script	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+
     <title>Progress Report</title>
     <style>
         body {
@@ -31,6 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         span {
             color: #ff8080;
+        }
+        .navbar{
+            position: fixed;
+            top: 0;
+        }
+        .table{
+            margin-top: 60%;
+            padding-top: 30%;
         }
     </style>
 </head>
@@ -57,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     </nav>
     <!-- Navbar ends -->
     <!-- Table start -->
-    <div class="container my-3">
+    <div class="container my-4">
         <table class="table table-striped table-hover table-bordered" id="myTable">
             <thead class="table-dark">
                 <tr style="text-align:center">
@@ -83,13 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 // $status_array=array();
                 // $image=array();
 
-                // Status query
-                
-                
-                // Status query ends
                 // ------------------------------------
                 // Exam title fetch starts
-                while ($TitleRow = mysqli_fetch_array($result)) {       
+                while ($TitleRow = mysqli_fetch_array($result)) {
                     $titl = $TitleRow[1] . "_" . $TitleRow[0];
                     $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
                     array_push($exam_id_array, $IdRow);
@@ -97,33 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 }
                 // Exam title fetch ends
                 // ------------------------------------
-                // 
-                // $status_query="SELECT * FROM `rb_studentexamresult_tb` WHERE status='incorrect' AND studentid=$uid ORDER BY questionid";
-                // $status_result=mysqli_query($conn,$status_query);
-                // $status_count=mysqli_num_rows($status_result);
-                
-                // // image part start
-                // function second_query($image2,$image3){
-                //     $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
-                //     $image_query="SELECT * FROM `rb_studentexamqus_tb` WHERE testid=$image2 AND id=$image3";
-                //     $img_resu=mysqli_query($conn,$image_query) or die( mysqli_error($conn));
-                //     $image_count=mysqli_num_rows($img_resu);
-                //     $image_row=mysqli_fetch_array($img_resu);
-                //     if($image_count==1){
-                //     echo nl2br("<b>Question:</b>\n\n<img src='$image_row[9]' width=75% height=75%>\n\n");
-                //     echo nl2br("<b>Correct Answer : <span style='color:white;text-transform:uppercase'>$image_row[14]</span>\n\n");
-                //     echo nl2br("Solution:\n\n<img src='$image_row[3]' width=75% height=75%>\n\n");
-                //     }
-                //     else{
-                //         echo "No Data Found";
-                //     }
-                //     // echo "<br>";
-                // }
-                // while($image=mysqli_fetch_array($status_result)){
-                //     second_query($image[2],$image[3]);
-                // }
-                // image part ends
-
                 foreach ($exam_id_array as $value) {
                     $user_id = $_SESSION['id'];
                     $marks_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE studentid='$user_id' AND testid='$value'";
@@ -146,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         echo "<td> Exam Pending </td>";
                     }
                     echo "<td>$exam_marks[$i]%</td>";
-                    echo "<td><a href='solution.php'><input type='button' value='View Solution'></a></td></tr>";
+                    echo "<td><a href='solution.php'><input type='button' class='btn btn-success' id='butn' value='View Solution'></a></td></tr>";
                 }
                 ?>
                 <!-- Score ends -->
@@ -154,6 +132,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </table>
     </div>
     <!-- Table ends -->
+    <form action="solution.php" method="POST">
+        <script src="jquery.min.js"></script>
+        <script>
+            $('.table tbody').on('click', '.btn', function() {
+                var currow = $(this).closest('tr');
+                var col1 = currow.find('td:eq(1)').text();
+                var p_id = col1.substr(col1.search('_') + 1, col1.length);
+                alert(p_id);
+            })
+        </script>;
+    </form>
     <!-- Datatables javascript start -->
     <script>
         $(document).ready(function() {

@@ -100,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             second_query($image[2], $image[3]);
         }
         // image part ends
+        // 
         ?>
     </div>
 </body>

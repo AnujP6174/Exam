@@ -78,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $exam_id_array = array();
                 $exam_marks = array();
                 $exam_title = array();
+
+                // 
                 
 
                 // ------------------------------------

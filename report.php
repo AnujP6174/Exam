@@ -20,9 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-
     <title>Progress Report</title>
     <style>
         body {
@@ -32,14 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         span {
             color: #ff8080;
-        }
-        .navbar{
-            position: fixed;
-            top: 0;
-        }
-        .table{
-            margin-top: 60%;
-            padding-top: 30%;
         }
     </style>
 </head>

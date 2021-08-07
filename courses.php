@@ -51,13 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </nav>
     <!-- Navbar ends -->
-    <div class="container my-4">
-        <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="ddbtn" data-bs-toggle="dropdown" aria-expanded="false">Subject</button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="">Action</a></li>
-            </ul>
-        </div>
     </div>
     <?php
     $course_class = $_SESSION['class'];
@@ -67,11 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sub_count = mysqli_num_rows($sub_result);
 
     if ($sub_count == 0) {
-        echo "No Match Found!";
+        echo "<div class='container my-4'>No Match Found!</div>";
     } else {
+        echo "<div class='container my-4'><label>Select Subject: </label> <select style='width: 15%;'>";
         while ($sub_row = mysqli_fetch_array($sub_result)) {
-            
+            echo "<option id='dropdown'>" . $sub_row[1] . "</option>";
         }
+        echo "</select></div>";
     }
     ?>
 </body>

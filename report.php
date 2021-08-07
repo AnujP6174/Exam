@@ -123,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     }
                 }
                 ?>
+                <!-- Score ends -->
                 <!-- <script>
                     $(document).ready(function() {
                         $('input[id="butn"]').attr('disabled', true);
@@ -137,7 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         }
                     });
                 </script> -->
-                <!-- Score ends -->
             </tbody>
         </table>
         <center>

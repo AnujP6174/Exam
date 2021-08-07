@@ -60,15 +60,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </div>
     <?php
-        $course_class=$_SESSION['class'];
-        $sub_query="SELECT * FROM `rb_subject_tb` WHERE class=$course_class";
-        $sub_result=mysqli_query($conn,$sub_query) or die(mysqli_error($conn));
-        echo $sub_result;
-        // $sub_count=mysqli_num_rows($sub_result);
-        while($sub_row=mysqli_fetch_array($sub_result))
-        {
-            echo '$sub_row["subject_name"]';
+    $course_class = $_SESSION['class'];
+    $course_class = $course_class . '%';
+    $sub_query = "SELECT * FROM `rb_subject_tb` WHERE class LIKE '$course_class'";
+    $sub_result = mysqli_query($conn, $sub_query) or die(mysqli_error($conn));
+    $sub_count = mysqli_num_rows($sub_result);
+
+    if ($sub_count == 0) {
+        echo "No Match Found!";
+    } else {
+        while ($sub_row = mysqli_fetch_array($sub_result)) {
+            
         }
+    }
     ?>
 </body>
 

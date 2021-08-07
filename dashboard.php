@@ -41,14 +41,13 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
         <center>
             <i class="bi bi-person-circle"></i>
             <h4><?php echo ($_SESSION['username']); ?></h4>
-        <?php
-        if(!isset($_SESSION['username'])){
-
-        }
-        // else{
-        //     header('Location: /internship/login.php');
-        // }
-        ?>
+            <?php
+            if (!isset($_SESSION['username'])) {
+            }
+            // else{
+                // header('Location: /internship/login.php');
+            // }
+            ?>
         </center>
         <a href="report.php"><i class="fas fa-tasks"></i><span>Progress Report</span></a>
         <a href="about.php"><i class="fas fa-info-circle"></i><span>About You</span></a>

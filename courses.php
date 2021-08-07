@@ -51,6 +51,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </nav>
     <!-- Navbar ends -->
+    <div class="container my-4">
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="ddbtn" data-bs-toggle="dropdown" aria-expanded="false">Subject</button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="">Action</a></li>
+            </ul>
+        </div>
+    </div>
+    <?php
+        $course_class=$_SESSION['class'];
+        $sub_query="SELECT * FROM `rb_subject_tb` WHERE class=$course_class";
+        $sub_result=mysqli_query($conn,$sub_query) or die(mysqli_error($conn));
+        echo $sub_result;
+        // $sub_count=mysqli_num_rows($sub_result);
+        while($sub_row=mysqli_fetch_array($sub_result))
+        {
+            echo '$sub_row["subject_name"]';
+        }
+    ?>
 </body>
 
 </html>

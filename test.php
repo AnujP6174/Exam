@@ -62,6 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $result = mysqli_query($conn, $sql);
         $count = mysqli_num_rows($result);
         while ($TitleRow = mysqli_fetch_array($result)) {
+            $exam_class=$TitleRow['class'];
+            $_SESSION['class']=$exam_class;
             $titl = $TitleRow[1] . "_" . $TitleRow[0];
             $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
             echo "<ul>

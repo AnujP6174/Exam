@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     if ($exam_marks[$i] > 0) {
                         echo "<td><a href='solution.php?testid=$exam_id_array[$i]'><input type='button' class='btn btn-success' id='butn' value='View Solution'></a></td></tr>";
                     } else {
-                        echo "<td>Exam Pending</td></tr>";
+                        echo "<td><button class='btn btn-success disabled'>Exam Pending</button></td></tr>";
                     }
                 }
                 ?>

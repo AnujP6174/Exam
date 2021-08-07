@@ -140,12 +140,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </script> -->
             </tbody>
         </table>
+        <!-- Table ends -->
         <center>
             <input type="button" class="btn btn-success" id="view_chart_btn" value="View Detailed Marks Graph">
             <div id="columnchart_material" style="width: 800px; height:500px; display:none;"></div>
         </center>
     </div>
-    <!-- Table ends -->
     <!-- Datatables javascript start -->
     <script>
         $(document).ready(function() {
@@ -153,6 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         });
     </script>
     <!-- Datatables javascript ends -->
+    <!-- Graph Starts -->
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -195,6 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             chart.draw(data, google.charts.Bar.convertOptions(options));
         }
     </script>
+    <!-- Graph Ends -->
 </body>
 
 </html>

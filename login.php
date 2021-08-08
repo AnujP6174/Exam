@@ -41,7 +41,7 @@
             $query = "SELECT * FROM `rb_user_tb` WHERE username='$UserN' AND password='$PassW'";
             $result = mysqli_query($conn, $query);
             $count = mysqli_num_rows($result);
-            $row=mysqli_fetch_array($result);
+            $row = mysqli_fetch_array($result);
             if ($count == 1) {
               $TmpClss = $row['class'];
               $_SESSION['username'] = $UserN;

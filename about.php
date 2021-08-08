@@ -57,13 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <!-- Navbar ends -->
     <center>
         <div class="container my-4">
-            <?php
-            if (!isset($_SESSION['username'])) {
-                unset($_SESSION['userame']);
-                unset($_SESSION['id']);
-                unset($_SESSION['class']);
-            }
-            ?>
             <p><b>Name:</b> <?php
                             $un = $_SESSION['username'];
                             $sql = "SELECT * FROM `rb_user_tb` WHERE username='$un'";

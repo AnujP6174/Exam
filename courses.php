@@ -84,7 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $chapter_query="SELECT DISTINCT Chap_name FROM `rb_chapter_tb` WHERE subject='$selected_subject'";
             $chapter_result=mysqli_query($conn,$chapter_query) or die(mysqli_error($conn));
             $chapter_count=mysqli_num_rows($chapter_result);
-            $progress_query="SELECT DISTINCT Progress FROM `chapter_completion_tb` WHERE Chap_name=''";
             echo '<div class="container my-4">
             <table class="table table-striped table-hover table-bordered" id="myTable">
             <thead class="table-dark">
@@ -96,8 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </thead>
             <tbody>';
                 while($chapter_row=mysqli_fetch_array($chapter_result)){
-                    echo "<tr><td>$chapter_row[0]</td></tr>";
+                    echo "<tr><td>$chapter_row[0]</td>";
                     $progress_query="SELECT DISTINCT Progress FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
+                    $progress_result=mysqli_query($conn,$progress_query) or die(mysqli_error($conn));
+                    $progress_row=mysqli_fetch_array($progress_result);
+                    echo "<td>$progress_row[0]</td></tr>";
+                    
                 }
             echo '</tbody></table>';
         }

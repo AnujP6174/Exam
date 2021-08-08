@@ -99,12 +99,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <tbody>';
                 while($chapter_row=mysqli_fetch_array($chapter_result)){
                     echo "<tr><td>$chapter_row[0]</td>";
-                    $progress_query="SELECT DISTINCT Progress FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
+                    $progress_query="SELECT Progress FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
                     $progress_result=mysqli_query($conn,$progress_query) or die(mysqli_error($conn));
                     $progress_row=mysqli_fetch_array($progress_result);
                     echo "<td>$progress_row[0] ";
                     if($progress_row[0]=='Not Done'){
-                        echo "&nbsp <input type='submit' name='progress_button' onclick= id='progress_button' value='Mark as Done'></td></tr>";
+                        echo "&nbsp <input type='submit' name='progress_btn' id='progress_button' value='Mark as Done'>";
+                        if($_SERVER['REQUEST_METHOD']=='GET'){
+                            if(isset($_GET['progress_btn'])){
+                                $button_selection=$_GET['progress_button'];
+                                $button_query="UPDATE `chapter_completion_tb` SET Progress='Done' WHERE Progress='Not Done'";
+                                $button_result=mysqli_query($conn,$button_query);
+                                $button_row=mysqli_fetch_array($button_result);
+                                echo "&nbsp <input type='submit' name='progress_btn' id='progress_button' value='Mark as Done'>";
+                            }
+                        }
                     }
                     
                 }
@@ -113,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     ?>
     <!-- Progress table ends -->
-    
+
     <!-- <script>
         function selectSubject() {
             var dropdown = document.getElementById("class_dropdown");

@@ -99,7 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     $progress_query="SELECT DISTINCT Progress FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
                     $progress_result=mysqli_query($conn,$progress_query) or die(mysqli_error($conn));
                     $progress_row=mysqli_fetch_array($progress_result);
-                    echo "<td>$progress_row[0]</td></tr>";
+                    echo "<td>$progress_row[0]";
+                    if($progress_row[0]=='Not Done'){
+                        echo "<button>Mark</button></td></tr>";
+                    }
                     
                 }
             echo '</tbody></table>';
@@ -111,11 +114,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         function selectSubject() {
             var dropdown = document.getElementById("class_dropdown");
             var selected_class = dropdown.options[dropdown.selectedIndex].value;
-
-            <?php
-
-            ?>
-
         }
     </script> -->
 </body>

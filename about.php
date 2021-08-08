@@ -27,7 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         span {
             color: #ff8080;
         }
-        p{
+
+        p {
             color: #ffcc99;
         }
     </style>
@@ -48,14 +49,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <button class="btn btn-transparent" type="submit">Home</button>
                 </form>
                 <form action="login.php">
-                    <button class="btn btn-transparent" type="submit">Logout</button>
+                    <input href="logout.php" class="btn btn-transparent" type="button" value="Logout"></input>
                 </form>
             </div>
         </div>
     </nav>
     <!-- Navbar ends -->
     <center>
-    <div class="container my-4">
+        <div class="container my-4">
+            <?php
+            if (!isset($_SESSION['username'])) {
+                unset($_SESSION['userame']);
+                unset($_SESSION['id']);
+                unset($_SESSION['class']);
+            }
+            ?>
             <p><b>Name:</b> <?php
                             $un = $_SESSION['username'];
                             $sql = "SELECT * FROM `rb_user_tb` WHERE username='$un'";

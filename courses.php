@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <button class="btn btn-transparent" type="submit">Home</button>
                 </form>
                 <form action="login.php">
-                    <button class="btn btn-transparent" type="submit">Logout</button>
+                <input href="logout.php" class="btn btn-transparent" type="submit" value="Logout"></input>
                 </form>
             </div>
         </div>
@@ -58,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sub_query = "SELECT DISTINCT subject_name FROM `rb_subject_tb` WHERE class LIKE '$course_class'";
     $sub_result = mysqli_query($conn, $sub_query) or die(mysqli_error($conn));
     $sub_count = mysqli_num_rows($sub_result);
+    if (!isset($_SESSION['class'])) {
+    }
 
     if ($sub_count == 0) {
         echo "<center>

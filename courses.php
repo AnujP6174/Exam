@@ -51,24 +51,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </nav>
     <!-- Navbar ends -->
-    </div>
     <?php
     $course_class = $_SESSION['class'];
     $course_class = $course_class . '%';
-    $sub_query = "SELECT * FROM `rb_subject_tb` WHERE class LIKE '$course_class'";
+    $sub_query = "SELECT DISTINCT subject_name FROM `rb_subject_tb` WHERE class LIKE '$course_class'";
     $sub_result = mysqli_query($conn, $sub_query) or die(mysqli_error($conn));
     $sub_count = mysqli_num_rows($sub_result);
 
     if ($sub_count == 0) {
-        echo "<div class='container my-4'>No Match Found!</div>";
+        echo "<center>
+        <div class='container my-4'>No Data Found for this Student!</div>
+        </center>";
     } else {
-        echo "<div class='container my-4'><label>Select Subject: </label> <select style='width: 15%;'>";
+        echo "<div class='container my-4'>
+        <form action='courses.php' method='GET'>
+        <label>Select Subject: </label>
+        <select class='dropdown' id='class_dropdown' name='class_dropdown' style='width: 15%;'>";
         while ($sub_row = mysqli_fetch_array($sub_result)) {
-            echo "<option id='dropdown'>" . $sub_row[1] . "</option>";
+            echo "<option value='$sub_row[0]'>" . $sub_row[0] . "</option>";
         }
-        echo "</select></div>";
+        echo "</select> &nbsp &nbsp &nbsp
+        <input type='submit' name='subject_select' id='subject_select' value='Proceed'>
+        </form>
+        </div>";
     }
     ?>
+
+    <?php
+    if($_SERVER['REQUEST_METHOD']=="GET"){
+        if(isset($_GET['subject_select'])){
+            $selected_subject = $_GET['class_dropdown'];
+            $chapter_query="SELECT DISTINCT Chap_name FROM `rb_chapter_tb` WHERE subject='$selected_subject'";
+            $chapter_result=mysqli_query($conn,$chapter_query) or die(mysqli_error($conn));
+            $chapter_count=mysqli_num_rows($chapter_result);
+            $progress_query="SELECT DISTINCT Progress FROM `chapter_completion_tb` WHERE Chap_name=''";
+            echo '<div class="container my-4">
+            <table class="table table-striped table-hover table-bordered" id="myTable">
+            <thead class="table-dark">
+                <tr style="text-align:center">
+                <th scope="col">Chapter</th>
+                    <th scope="col">Chapter Status</th>
+                    <th scope="col">Difficulty Level</th>
+                </tr>
+            </thead>
+            <tbody>';
+                while($chapter_row=mysqli_fetch_array($chapter_result)){
+                    echo "<tr><td>$chapter_row[0]</td></tr>";
+                    $progress_query="SELECT DISTINCT Progress FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
+                }
+            echo '</tbody></table>';
+        }
+    }
+    ?>
+
+    <!-- <script>
+        function selectSubject() {
+            var dropdown = document.getElementById("class_dropdown");
+            var selected_class = dropdown.options[dropdown.selectedIndex].value;
+
+            <?php
+
+            ?>
+
+        }
+    </script> -->
 </body>
 
 </html>

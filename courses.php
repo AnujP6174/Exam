@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $chapter_count=mysqli_num_rows($chapter_result);
             echo '<div class="container my-4">
             <form action="courses.php" method="GET">
-            <table class="table table-striped table-hover table-bordered">
-            <thead class="table-dark">
+            <table style="width:50%" class="table table-striped table-hover table-bordered">
+            <thead class="table table-dark">
                 <tr style="text-align:center">
                 <th scope="col">Chapter</th>
                     <th scope="col">Chapter Status</th>
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </thead>
             <tbody>';
                 while($chapter_row=mysqli_fetch_array($chapter_result)){
-                    echo "<tr><td>$chapter_row[0]</td>";
+                    echo "<tr style='text-align:center'><td>$chapter_row[0]</td>";
                     $progress_query="SELECT Progress FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
                     $progress_result=mysqli_query($conn,$progress_query) or die(mysqli_error($conn));
                     $progress_row=mysqli_fetch_array($progress_result);

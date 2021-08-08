@@ -51,13 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </nav>
     <!-- Navbar ends -->
+    <!-- Dropdown Starts -->
     <?php
     $course_class = $_SESSION['class'];
     $course_class = $course_class . '%';
     $sub_query = "SELECT DISTINCT subject_name FROM `rb_subject_tb` WHERE class LIKE '$course_class'";
     $sub_result = mysqli_query($conn, $sub_query) or die(mysqli_error($conn));
     $sub_count = mysqli_num_rows($sub_result);
-
+    
     if ($sub_count == 0) {
         echo "<center>
         <div class='container my-4'>No Data Found for this Student!</div>
@@ -76,7 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>";
     }
     ?>
-
+    <!-- Dropdown Ends -->
+    <!-- Progress table start -->
     <?php
     if($_SERVER['REQUEST_METHOD']=="GET"){
         if(isset($_GET['subject_select'])){
@@ -85,7 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $chapter_result=mysqli_query($conn,$chapter_query) or die(mysqli_error($conn));
             $chapter_count=mysqli_num_rows($chapter_result);
             echo '<div class="container my-4">
-            <table class="table table-striped table-hover table-bordered" id="myTable">
+            <form action="courses.php" method="GET">
+            <table class="table table-striped table-hover table-bordered">
             <thead class="table-dark">
                 <tr style="text-align:center">
                 <th scope="col">Chapter</th>
@@ -99,17 +102,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     $progress_query="SELECT DISTINCT Progress FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
                     $progress_result=mysqli_query($conn,$progress_query) or die(mysqli_error($conn));
                     $progress_row=mysqli_fetch_array($progress_result);
-                    echo "<td>$progress_row[0]";
+                    echo "<td>$progress_row[0] ";
                     if($progress_row[0]=='Not Done'){
-                        echo "<button>Mark</button></td></tr>";
+                        echo "&nbsp <input type='submit' name='progress_button' onclick= id='progress_button' value='Mark as Done'></td></tr>";
                     }
                     
                 }
-            echo '</tbody></table>';
+            echo '</tbody></table></form>';
         }
     }
     ?>
-
+    <!-- Progress table ends -->
+    
     <!-- <script>
         function selectSubject() {
             var dropdown = document.getElementById("class_dropdown");

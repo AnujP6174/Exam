@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $progress_query = "UPDATE `chapter_completion_tb` SET Progress='Done' WHERE Chap_name='$chapter_selected'";
         $progress_result = mysqli_query($conn, $progress_query) or die(mysqli_error($conn));
         echo '<div class="container my-4">
-        <table style="width:50%" class="table table-striped table-hover table-bordered">
+        <table class="table table-striped table-hover table-bordered">
             <thead class="table table-dark">
                 <tr style="text-align:center">
                     <th scope="col">Chapter</th>

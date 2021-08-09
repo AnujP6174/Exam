@@ -30,6 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         span {
             color: #ff8080;
         }
+        label{
+            font-size:large;
+            font-family: Arial,Courier;
+        }
     </style>
 </head>
 

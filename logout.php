@@ -6,6 +6,7 @@ unset($_SESSION["class"]);
 session_destroy();
 session_write_close();
 header('Location: /internship/login.php');
+exit();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -115,14 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $final_count = mysqli_num_rows($final_result);
         while ($final_row = mysqli_fetch_array($final_result)) {
             echo "<tr class='table table-success' style='text-align:center'><td>$final_row[2]</td>";
-            echo "<td>$final_row[3]</td></tr>";
+            echo "<td>$final_row[3]</td>";
+            echo "<td>$final_row[4]</td></tr>";
         }
         echo "</tbody></table></div>";
     }
     ?>
     <!-- Chapter Dropdown Ends -->
-
-
 </body>
 
 </html>

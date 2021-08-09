@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             array_push($exam_id_array, $IdRow);
             array_push($exam_title, $titl);
         }
-        
+
         // Exam title fetch ends
         // ------------------------------------
         $status_query = "SELECT * FROM `rb_studentexamresult_tb` WHERE status='incorrect' AND testid=$testid AND studentid=$uid ORDER BY questionid";

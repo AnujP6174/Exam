@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             echo "<option>" . $sub_row[0] . "</option>";
         }
         echo "</select> &nbsp &nbsp &nbsp
-        <input style='width:9%' type='submit' name='select_subject' id='subject_select' value='Proceed'>";
+        <input class='btn btn-danger' style='width:9%' type='submit' name='select_subject' id='subject_select' value='Proceed'>";
     }
     ?>
     <?php
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             echo "<option>" . $chapter_row[0] . "</option>";
         }
         echo "</select> &nbsp &nbsp &nbsp
-            <input type='submit' name='chapter_done' id='done_chapter' value='Mark As Done'></form></div>";
+            <input class='btn btn-danger' type='submit' name='chapter_done' id='done_chapter' value='Mark As Done'></form></div>";
     }
     if (isset($_GET['chapter_done'])) {
         $chapter_selected = $_GET['dropdown_chapter'];

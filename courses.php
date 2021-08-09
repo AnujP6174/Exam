@@ -144,13 +144,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </body>
 
 </html>
-    <!-- // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //     $button_query = "UPDATE `chapter_completion_tb` SET Progress='Done' WHERE Chap_name='$chapter_row[0]' Progress='$progress_row[0]'";
-    //     $button_result = mysqli_query($conn, $button_query) or die(mysqli_error($conn));
-    //     $button_row = mysqli_fetch_array($button_result);
-    //     if (isset($_GET['progress_btn'])) {
-    //         $button_selection = $_GET['progress_button'];
-
-    //         echo "&nbsp <input type='submit' name='progress_btn' id='progress_button' value='Mark as Done'>";
-    //     }
-    // } -->

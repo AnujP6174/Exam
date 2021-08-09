@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <form class="d-flex" action="dashboard.php">
                     <button class="btn btn-transparent" type="submit">Home</button>
                 </form>
-                <form action="login.php">
+                <form action="logout.php">
                     <input href="logout.php" class="btn btn-transparent" type="button" value="Logout"></input>
                 </form>
             </div>

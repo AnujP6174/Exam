@@ -135,7 +135,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             request.onreadystatechange = function() {
                 if (request.readyState == 4 && request.status == 200) {
                     markAsDone(chapter_name);
-                    alert(request.responseText);
                 }
             }
         }

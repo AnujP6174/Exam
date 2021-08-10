@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $chapter_result = mysqli_query($conn, $chapter_query) or die(mysqli_error($conn));
             // $chapter_count = mysqli_num_rows($chapter_result);
             echo '<div class="container my-4">
-            <table style="width:100%" class="table table-striped table-hover table-bordered">
+            <table style="width:70%" class="table table-striped table-hover table-bordered">
             <thead class="table table-dark">
                 <tr style="text-align:center">
                 <th scope="col">Chapter</th>

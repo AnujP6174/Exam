@@ -69,12 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo "<div class='container my-4'>
         <form action='courses.php' method='GET'>
         <label>Select Subject: </label>
-        <select class='dropdown' id='class_dropdown' name='class_dropdown' style='width: 15%;'>";
+        <select id='class_dropdown' name='class_dropdown' style='width: 15%;'>";
         while ($sub_row = mysqli_fetch_array($sub_result)) {
             echo "<option value='$sub_row[0]'>" . $sub_row[0] . "</option>";
         }
         echo "</select> &nbsp &nbsp &nbsp
-        <input type='submit' name='subject_select' id='subject_select' value='Proceed'>
+        <input class='btn btn-danger' type='submit' name='subject_select' id='subject_select' value='Proceed'>
         </form>
         </div>";
     }
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $selected_subject = $_GET['class_dropdown'];
             $chapter_query = "SELECT Chap_name FROM `rb_chapter_tb` WHERE subject='$selected_subject'";
             $chapter_result = mysqli_query($conn, $chapter_query) or die(mysqli_error($conn));
-            $chapter_count = mysqli_num_rows($chapter_result);
+            // $chapter_count = mysqli_num_rows($chapter_result);
             echo '<div class="container my-4">
             <table style="width:100%" class="table table-striped table-hover table-bordered">
             <thead class="table table-dark">
@@ -104,15 +104,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </thead>
             <tbody>';
             while ($chapter_row = mysqli_fetch_array($chapter_result)) {
-                echo "<tr style='text-align:center'><td>$chapter_row[0]</td>";
-                $progress_query = "SELECT Progress FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
+                echo "<tr class='table table-success' style='text-align:center'><td>$chapter_row[0]</td>";
+                $progress_query = "SELECT * FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
                 $progress_result = mysqli_query($conn, $progress_query) or die(mysqli_error($conn));
                 $progress_row = mysqli_fetch_array($progress_result);
-                if ($progress_row[0] == "Done") {
-                    echo "<td id=$chapter_row[0]>$progress_row[0]</td>";
+                if ($progress_row[3] == "Done") {
+                    echo "<td id=$chapter_row[0]>$progress_row[3]</td>";
                 } else {
-                    echo '<td id=' . "$chapter_row[0]" . '><input type="button" name="progress_btn" id=progress_button_' . "$chapter_row[0]" . ' value="Mark as Done" onclick=(update_status(' . "'$chapter_row[0]'" . '))></td>';
+                    echo '<td id=' . "$chapter_row[0]" . '><input class="btn btn-danger" type="button" name="progress_btn" id=progress_button_' . "$chapter_row[0]" . ' value="Mark as Done" onclick=(update_status(' . "'$chapter_row[0]'" . '))></td>';
                 }
+                echo "<td>$progress_row[4]</td></tr>";
             }
             echo '</tbody></table>';
         }

@@ -13,9 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script language="javascript" type="text/javascript">
-        window.history.forward();
-    </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     <title>Courses</title>
     <style>
         body {
@@ -72,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo "<div class='container my-4'>
         <form action='courses.php' method='GET'>
         <label>Select Subject: </label>
-        <select id='class_dropdown' name='class_dropdown' style='width: 15%;'>";
+        <select class='dropdown' id='class_dropdown' name='class_dropdown' style='width: 15%;'>";
         while ($sub_row = mysqli_fetch_array($sub_result)) {
             echo "<option value='$sub_row[0]'>" . $sub_row[0] . "</option>";
         }
@@ -93,11 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
         if (isset($_GET['subject_select'])) {
             $selected_subject = $_GET['class_dropdown'];
-            $chapter_query = "SELECT Chap_name FROM `rb_chapter_tb` WHERE subject='$selected_subject'";
+            $chapter_query = "SELECT * FROM `rb_chapter_tb` WHERE subject='$selected_subject'";
             $chapter_result = mysqli_query($conn, $chapter_query) or die(mysqli_error($conn));
-            // $chapter_count = mysqli_num_rows($chapter_result);
+            $chapter_count = mysqli_num_rows($chapter_result);
             echo '<div class="container my-4">
-            <table style="width:70%" class="table table-striped table-hover table-bordered">
+            <table style="width:75%" class="table table-striped table-hover table-bordered">
             <thead class="table table-dark">
                 <tr style="text-align:center">
                 <th scope="col">Chapter</th>
@@ -107,33 +105,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </thead>
             <tbody>';
             while ($chapter_row = mysqli_fetch_array($chapter_result)) {
-                echo "<tr class='table table-success' style='text-align:center'><td>$chapter_row[0]</td>";
-                $progress_query = "SELECT * FROM `chapter_completion_tb` WHERE Chap_name='$chapter_row[0]'";
-                $progress_result = mysqli_query($conn, $progress_query) or die(mysqli_error($conn));
-                $progress_row = mysqli_fetch_array($progress_result);
-                if ($progress_row[3] == "Done") {
-                    echo "<td id=$chapter_row[0]>$progress_row[3]</td>";
+                echo "<tr class='table-primary' style='text-align:center'><td>$chapter_row[2]</td>";
+                $usr_id = $_SESSION['id'];
+                $progress_query = "SELECT Progress from `chapter_completion_tb` WHERE Chap_name='$chapter_row[2]' AND user_id='$usr_id'";
+                $progress_query_result =  mysqli_query($conn, $progress_query) or die(mysqli_error($conn));
+                $progress_query_row = mysqli_fetch_array($progress_query_result);
+                if ($progress_query_row == null || $progress_query_row[0] == "Not Done") {
+                    echo '<td id=' . "$chapter_row[2]" . '><input class="btn btn-danger" type="button" name="progress_btn" id=progress_button_' . "$chapter_row[2]" . ' value="Mark as Done" onclick=(update_status(' . "'$chapter_row[2]'" . '))></td>';
                 } else {
-                    echo '<td id=' . "$chapter_row[0]" . '><input class="btn btn-danger" type="button" name="progress_btn" id=progress_button_' . "$chapter_row[0]" . ' value="Mark as Done" onclick=(update_status(' . "'$chapter_row[0]'" . '))></td>';
+                    echo "<td id=$chapter_row[2]>Done</td>";
                 }
-                echo "<td>$progress_row[4]</td></tr>";
+                echo "<td>$chapter_row[4]</td></tr>";
             }
             echo '</tbody></table>';
+            // echo ' <center><input type="button" class="btn btn-success" id="view_chart_btn" value="View Detailed Chapter Completion Graph">';
+            // echo '<div id="piechart" style="width: 900px; height: 500px; display:none;"></div></center>';
         }
-        echo '<script type="text/javascript">proceedBtnClick();</script>';
+        // echo '<script type="text/javascript">proceedBtnClick();</script>';
     }
     ?>
     <script>
         function update_status(chapter_name) {
 
             var request = new XMLHttpRequest();
-            // alert(chapter_name);
-            request.open("GET", "update_chapter_status.php?chapter=" + chapter_name, true);
+            var usr_id = '<?php echo $_SESSION['id']; ?>';
+            request.open("GET", "update_chapter_status.php?chapter=" + chapter_name + "&user_id=" + usr_id, true);
             request.send();
 
             request.onreadystatechange = function() {
                 if (request.readyState == 4 && request.status == 200) {
                     markAsDone(chapter_name);
+                    alert(request.responseText);
                 }
             }
         }
@@ -146,55 +148,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <!-- Progress table ends -->
 
     <!--Pie chart starts-->
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+
 
     <?php
-    $chapters_array = array();
-    $chapters_notdone_array = array();
-    $progress_done_array = array();
-    $progress_notdone_array = array();
-    $selected_subject = $_GET['class_dropdown'];
-    $chapters = "SELECT Chap_name FROM `rb_chapter_tb` WHERE subject='$selected_subject'";
-    $chapters_result = mysqli_query($conn, $chapter_query) or die(mysqli_error($conn));
-    while ($graph_chapters = mysqli_fetch_array($chapters_result)) {
-        array_push($chapters_array, $graph_chapters[0]);
-        $completed_or_not = "SELECT Progress FROM `chapter_completion_tb` WHERE Chap_name='$graph_chapters[0]'";
-        $completed_or_not_result = mysqli_query($conn, $progress_query) or die(mysqli_error($conn));
-        while ($graph_progress = mysqli_fetch_array($completed_or_not_result)) {
-            array_push($progress_array, $graph_progress[0]);
-        }
-    }
+    // $chapters_array = array();
+    // // $chapters_notdone_array = array();
+    // $progress_done_array = array();
+    // $progress_notdone_array = array();
+    // $selected_subject = $_GET['class_dropdown'];
+    // $chapters = "SELECT Chap_name FROM `rb_chapter_tb` WHERE subject='$selected_subject'";
+    // $chapters_result = mysqli_query($conn, $chapter_query) or die(mysqli_error($conn));
+    // while ($graph_chapters = mysqli_fetch_array($chapters_result)) {
+    //     array_push($chapters_array, $graph_chapters[0]);
+    //     $completed_or_not = "SELECT Progress , count(*) as number FROM `chapter_completion_tb` WHERE Chap_name='$graph_chapters[0]' GROUP BY Progress";
+    //     $completed_or_not_result = mysqli_query($conn, $completed_or_not) or die(mysqli_error($conn));
+    // }
     ?>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!--Pie Chart Starts-->
+
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {
             'packages': ['corechart']
         });
-        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(initialize);
+
+        function initialize(){
+            $("#view_chart_btn").click(function() {
+                document.getElementById("#view_chart_btn").style.display = "none";
+                document.getElementById("#piechart").style.display = "block";
+                drawChart();
+                document.getElementById("#piechart").scrollIntoView();
+            });
+        }
 
         function drawChart() {
-            var chapters = JSON.parse('<?php echo json_encode($chapters_array); ?>');
-            var progress = JSON.parse('<?php echo json_encode($progress_array); ?>');
+            var data = google.visualization.arrayToDataTable([
+                ['Completed','Not Completed'],
+                <?php
+                //    while($row = mysqli_fetch_array($completed_or_not_result)){
+                //         echo "['".$row["Progress"]."', ".$row["number"]."],";
+                //     }
+                ?>
 
-            console.log(chapters);
-            console.log(progress);
-
-            var data = google.visualization.arrayToDataTable();
-            data.addColumn('Chapters', 'Completed');
-            // load data
-            for (var i = 0; i < chapters.length; i++) {
-                var row = [chapters[i], progress[i]];
-                data.addRow(row);
-            }
+            ]);
             var options = {
-                title: 'My Daily Activities'
+                title: 'Chapters Done vs Not Done'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
             chart.draw(data, options);
         }
-    </script>
+    </script> -->
 
     <!--Pie Chart Ends-->
 </body>

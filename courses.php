@@ -101,14 +101,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <table style="width:75%" class="table table-striped table-hover table-bordered">
             <thead class="table table-dark">
                 <tr style="text-align:center">
+                <th>Sr No.</th>
                 <th scope="col">Chapter</th>
-                    <th scope="col">Chapter Status</th>
-                    <th scope="col">Difficulty Level</th>
+                <th scope="col">Chapter Status</th>
+                <th scope="col">Difficulty Level</th>
                 </tr>
             </thead>
             <tbody>';
             while ($chapter_row = mysqli_fetch_array($chapter_result)) {
-                echo "<tr class='table-primary' style='text-align:center'><td>$chapter_row[2]</td>";
+                echo "<tr class='table-primary' style='text-align:center'><td>$chapter_row[0]</td>";
+                echo "<td>$chapter_row[2]</td>";
                 $usr_id = $_SESSION['id'];
 
                 $progress_query = "SELECT * from `chapter_completion_tb` WHERE Chap_name='$chapter_row[2]' AND user_id='$usr_id'";
@@ -116,9 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $progress_query_row = mysqli_fetch_array($progress_query_result);
 
                 if ($progress_query_row == NULL || $progress_query_row[3] == "Not Done") {
-                    echo '<td id=' . "$chapter_row[2]" . '><input class="btn btn-danger" type="button" name="progress_btn" id=progress_button_' . "$chapter_row[2]" . ' value="Mark as Done" onclick=(update_status(' . "'$chapter_row[2]'" . '))></td>';
+                    echo '<td id="' . $chapter_row[0] . '"><input class="btn btn-danger" type="button" name="progress_btn" id="btn_' . $chapter_row[0] . '" value="Mark as Done" onclick=(update_status("' . $chapter_row[0] . '"))></td>';
                 } else {
-                    echo "<td id=$chapter_row[2]>Done</td>";
+                    echo "<td id=$chapter_row[0]>Done</td>";
                 }
                 echo "<td>$chapter_row[4]</td></tr>";
             }
@@ -130,23 +132,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     ?>
     <script>
-        function update_status(chapter_name) {
+        function update_status(chapter_id) {
 
             var request = new XMLHttpRequest();
             var usr_id = '<?php echo $_SESSION['id']; ?>';
-            request.open("GET", "update_chapter_status.php?chapter=" + chapter_name + "&user_id=" + usr_id, true);
+            var class_name = '<?php echo $_SESSION['class']; ?>';
+            request.open("GET", "update_chapter_status.php?chapter=" + chapter_id + "&user_id=" + usr_id + "&class_name=" + class_name, true);
             request.send();
 
             request.onreadystatechange = function() {
                 if (request.readyState == 4 && request.status == 200) {
-                    markAsDone(chapter_name);
+                    markAsDone(chapter_id);
                 }
             }
         }
 
-        function markAsDone(chapter_name) {
-            document.getElementById('progress_button_' + chapter_name).style.display = "none";
-            document.getElementById(chapter_name).innerHTML = "Done";
+        function markAsDone(chapter_id) {
+            document.getElementById("btn_" + chapter_id).style.display = "none";
+            document.getElementById(chapter_id).innerHTML = "Done";
         }
     </script>
     <!-- Progress table ends -->

@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo "<div class='container my-4'>
         <form action='courses.php' method='GET'>
         <label>Select Subject: </label>
-        <select class='dropdown' id='class_dropdown' name='class_dropdown' style='width: 15%;'>";
+        <select class='dropdown' id='class_dropdown' name='class_dropdown' style='width: 22%;'>";
         while ($sub_row = mysqli_fetch_array($sub_result)) {
             echo "<option value='$sub_row[0]'>" . $sub_row[0] . "</option>";
         }
@@ -107,10 +107,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             while ($chapter_row = mysqli_fetch_array($chapter_result)) {
                 echo "<tr class='table-primary' style='text-align:center'><td>$chapter_row[2]</td>";
                 $usr_id = $_SESSION['id'];
-                $progress_query = "SELECT Progress from `chapter_completion_tb` WHERE Chap_name='$chapter_row[2]' AND user_id='$usr_id'";
+
+                $progress_query = "SELECT * from `chapter_completion_tb` WHERE Chap_name='$chapter_row[2]' AND user_id='$usr_id'";
                 $progress_query_result =  mysqli_query($conn, $progress_query) or die(mysqli_error($conn));
                 $progress_query_row = mysqli_fetch_array($progress_query_result);
-                if ($progress_query_row == null || $progress_query_row[0] == "Not Done") {
+
+                if ($progress_query_row == NULL || $progress_query_row[3] == "Not Done") {
                     echo '<td id=' . "$chapter_row[2]" . '><input class="btn btn-danger" type="button" name="progress_btn" id=progress_button_' . "$chapter_row[2]" . ' value="Mark as Done" onclick=(update_status(' . "'$chapter_row[2]'" . '))></td>';
                 } else {
                     echo "<td id=$chapter_row[2]>Done</td>";
@@ -147,8 +149,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <!-- Progress table ends -->
 
     <!--Pie chart starts-->
-
-
     <?php
     // $chapters_array = array();
     // // $chapters_notdone_array = array();

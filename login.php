@@ -35,6 +35,7 @@
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           session_start();
+          $_SESSION['logged']= 'yes';
           // Creating connection for database
           $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
 

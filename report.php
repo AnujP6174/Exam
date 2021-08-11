@@ -1,6 +1,9 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     session_start();
+    if (!isset($_SESSION['logged'])) {
+        header('Location:login.php');
+    }
     $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
 }
 ?>

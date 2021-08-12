@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     session_start();
-    if(!isset($_SESSION['logged'])){
+    if (!isset($_SESSION['logged'])) {
         header('Location:login.php');
     }
     $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <button class="btn btn-transparent" type="submit">Home</button>
                 </form>
                 <form action="logout.php">
-                    <input href="logout.php" class="btn btn-transparent" type="button" value="Logout"></input>
+                    <button class="btn btn-transparent" type="submit">Logout</button>
                 </form>
             </div>
         </div>

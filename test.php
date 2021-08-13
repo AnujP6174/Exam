@@ -1,9 +1,9 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     session_start();
-    if (!isset($_SESSION['logged'])) {
-        header('Location:login.php');
-    }
+    // if (!isset($_SESSION['logged'])) {
+    //     header('Location:login.php');
+    // }
     $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
 }
 ?>
@@ -57,26 +57,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </nav>
     <!-- Navbar ends -->
-    <form class="container my-4">
-        <?php
-        $user_id = $_SESSION['id'];
-        $ExmClss = $_SESSION['class'];
-        $ExmClss = $ExmClss . '%';
-        $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
-        $result = mysqli_query($conn, $sql);
-        $count = mysqli_num_rows($result);
-        while ($TitleRow = mysqli_fetch_array($result)) {
-            // $exam_class=$TitleRow['class'];
-            // $_SESSION['class']=$exam_class;
-            $titl = $TitleRow[1] . "_" . $TitleRow[0];
-            $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
-            echo "<ul>
-            <li><a href=https://www.rbeiset.com/packageexam/?examid=$IdRow>$titl</a></li>
-            </ul>";
-            echo "<br>";
-        }
-        ?>
-    </form>
+    <div class="container my-4">
+        <table>
+            <th>Test Name</th>
+            <th>Duration</th>
+            <th>Exam Link</th>
+            <?php
+            $user_id = $_SESSION['id'];
+            $ExmClss = $_SESSION['class'];
+            $ExmClss = $ExmClss . '%';
+            $sql = "SELECT * FROM `rb_studentexam_tb` WHERE class LIKE '$ExmClss'";
+            $result = mysqli_query($conn, $sql);
+            $count = mysqli_num_rows($result);
+            while ($TitleRow = mysqli_fetch_array($result)) {
+                // $exam_class=$TitleRow['class'];
+                // $_SESSION['class']=$exam_class;
+                $titl = $TitleRow[1] . "_" . $TitleRow[0];
+                $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
+                echo '<tr><td>' . "$titl" . '</td>';
+                echo '<td>' . "$TitleRow[2]" . '</td>';
+                echo '<td><button><a href=https://www.rbeiset.com/packageexam/?examid=' . "$IdRow" . '>Start Test</a></button></td></tr>';
+            }
+            ?>
+        </table>
+    </div>
 </body>
 
 </html>

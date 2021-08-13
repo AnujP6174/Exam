@@ -58,10 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     </nav>
     <!-- Navbar ends -->
     <div class="container my-4">
-        <table>
-            <th>Test Name</th>
-            <th>Duration</th>
-            <th>Exam Link</th>
+        <table style="width:75%" class="table table-striped table-hover table-bordered">
+            <thead class="table table-dark">
+                <tr style="text-align:center">
+                    <th>Test Name</th>
+                    <th>Duration</th>
+                    <th>Exam Link</th>
+                </tr>
+            </thead>
             <?php
             $user_id = $_SESSION['id'];
             $ExmClss = $_SESSION['class'];
@@ -74,9 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 // $_SESSION['class']=$exam_class;
                 $titl = $TitleRow[1] . "_" . $TitleRow[0];
                 $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
-                echo '<tr><td>' . "$titl" . '</td>';
+                echo '<tr style="text-align:center"><td>' . "$titl" . '</td>';
                 echo '<td>' . "$TitleRow[2]" . ' mins</td>';
-                echo '<td><button><a href=https://www.rbeiset.com/packageexam/?examid=' . "$IdRow" . '>Start Test</a></button></td></tr>';
+                echo '<td><button class="btn btn-danger"><a href=https://www.rbeiset.com/packageexam/?examid=' . "$IdRow" . '>Start Test</a></button></td></tr>';
             }
             ?>
         </table>

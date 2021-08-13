@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <table style="width:75%" class="table table-striped table-hover table-bordered">
             <thead class="table table-dark">
                 <tr style="text-align:center">
-                <th>Sr No.</th>
+                <th scope="col">Sr No.</th>
                 <th scope="col">Chapter</th>
                 <th scope="col">Chapter Status</th>
                 <th scope="col">Difficulty Level</th>

@@ -1,9 +1,9 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     session_start();
-    // if (!isset($_SESSION['logged'])) {
-    //     header('Location:login.php');
-    // }
+    if (!isset($_SESSION['logged'])) {
+        header('Location:login.php');
+    }
     $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
 }
 ?>
@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script language="javascript" type="text/javascript">
+    <!-- <script language="javascript" type="text/javascript">
         window.history.forward();
-    </script>
+    </script> -->
     <title>Test Panel</title>
     <style>
         body {

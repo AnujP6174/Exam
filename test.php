@@ -78,9 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 // $_SESSION['class']=$exam_class;
                 $titl = $TitleRow[1] . "_" . $TitleRow[0];
                 $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
-                echo '<tr style="text-align:center"><td>' . "$titl" . '</td>';
+                echo '<tr class="table-primary" style="text-align:center"><td>' . "$titl" . '</td>';
                 echo '<td>' . "$TitleRow[2]" . ' mins</td>';
-                echo '<td><button class="btn btn-danger"><a href=https://www.rbeiset.com/packageexam/?examid=' . "$IdRow" . '>Start Test</a></button></td></tr>';
+                echo '<td><button class="btn btn-success"><a href=https://www.rbeiset.com/packageexam/?examid=' . "$IdRow" . '>Start Test</a></button></td></tr>';
             }
             ?>
         </table>

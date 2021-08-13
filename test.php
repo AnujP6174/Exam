@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $titl = $TitleRow[1] . "_" . $TitleRow[0];
                 $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
                 echo '<tr><td>' . "$titl" . '</td>';
-                echo '<td>' . "$TitleRow[2]" . '</td>';
+                echo '<td>' . "$TitleRow[2]" . ' mins</td>';
                 echo '<td><button><a href=https://www.rbeiset.com/packageexam/?examid=' . "$IdRow" . '>Start Test</a></button></td></tr>';
             }
             ?>

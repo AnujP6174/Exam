@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             // echo ' <center><input type="button" class="btn btn-success" id="view_chart_btn" value="View Detailed Chapter Completion Graph">';
             // echo '<div id="piechart" style="width: 900px; height: 500px; display:none;"></div></center>';
         }
-        // echo '<script type="text/javascript">proceedBtnClick();</script>';
+        echo '<script type="text/javascript">proceedBtnClick();</script>';
     }
     ?>
     <script>

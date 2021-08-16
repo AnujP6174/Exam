@@ -57,6 +57,85 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </nav>
     <!-- Navbar ends -->
+
+    <!-- Dropdown Starts -->
+    <?php
+    $course_class = $_SESSION['class'];
+    $course_class = $course_class . '%';
+    $sub_query = "SELECT DISTINCT subject_name FROM `rb_subject_tb` WHERE class LIKE '$course_class'";
+    $sub_result = mysqli_query($conn, $sub_query) or die(mysqli_error($conn));
+    $sub_count = mysqli_num_rows($sub_result);
+    if (!isset($_SESSION['class'])) {
+    }
+
+    if ($sub_count == 0) {
+        echo "<center>
+        <div class='container my-4'>No Data Found for this Student!</div>
+        </center>";
+    } else {
+        echo "<div class='container my-4'>
+        <form action='los.php' method='GET'>
+        <label>Select Subject: </label>
+        <select class='dropdown' id='class_dropdown' name='class_dropdown' style='width: 22%;'>";
+        while ($sub_row = mysqli_fetch_array($sub_result)) {
+            echo "<option value='$sub_row[0]'>" . $sub_row[0] . "</option>";
+        }
+        echo "</select> &nbsp &nbsp &nbsp
+        <input class='btn btn-danger' type='submit' name='subject_select' id='subject_select' value='Proceed'>
+        </form>
+        </div>";
+    }
+    ?>
+    <!-- Dropdown Ends -->
+    <script>
+        function proceedBtnClick() {
+            document.getElementById('class_dropdown').value = "<?php echo $_GET['class_dropdown']; ?>";
+        }
+    </script>
+
+    <!--GET REQUEST Start-->
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == "GET") {
+        if (isset($_GET['subject_select'])) {
+            $course_class = $_SESSION['class'];
+            // echo $course_class;
+            // exit();
+            $selected_subject = $_GET['class_dropdown'];
+            $chapter_select_query = "SELECT Chapter FROM `imp_ch_los` WHERE subject='$selected_subject' AND Class='$course_class'";
+            $chapter_select_result = mysqli_query($conn, $chapter_select_query) or die(mysqli_error($conn));
+
+            while ($chapter_select_row = mysqli_fetch_array($chapter_select_result)) {
+                echo '<div class="container my-4">
+                <table style="width:75%" class="table table-striped table-hover table-bordered"
+                <thead class="table table-dark">
+                    <tr class="table-dark" style="text-align:center">
+                    <th scope="col" colspan=4>' . "$chapter_select_row[0]" . '</th>
+                    </tr>
+                    <tr class="table-primary" style="text-align:center">
+                    <th scope="col">IMP Topic</th>
+                    <th scope="col">Difficulty</th>
+                    <th scope="col">Nature</th>
+                    <th scope="col">Importance</th>
+                    </tr>
+                </thead>
+                <tbody>';
+
+                $select_chapter_imp_data = "SELECT * FROM `imp_ch_los` WHERE Subject='$selected_subject' AND Chapter='$chapter_select_row[0]'";
+                $select_chapter_imp_data_result = mysqli_query($conn, $select_chapter_imp_data) or die(mysqli_error($conn));
+                while ($select_chapter_imp_data_row = mysqli_fetch_array($select_chapter_imp_data_result)) {
+                    echo '<tr class="table-danger" style="text-align:center">
+                            <td>' . "$select_chapter_imp_data_row[4]" . '</td>
+                            <td>' . "$select_chapter_imp_data_row[5]" . '</td>
+                            <td>' . "$select_chapter_imp_data_row[6]" . '</td>
+                            <td>' . "$select_chapter_imp_data_row[7]" . '</td>
+                        </tr>';
+                }
+                echo '</tbody></table>';
+            }
+        }
+    }
+    ?>
+    <!--GET REQUEST Ends-->
 </body>
 
 </html>

@@ -133,6 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 echo '</tbody></table>';
             }
         }
+        echo '<script type="text/javascript">proceedBtnClick();</script>';
     }
     ?>
     <!--GET REQUEST Ends-->

@@ -52,7 +52,8 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
         <a href="https://studde.com/"><i class="fas fa-video"></i><span>Lectures</span></a>
         <a href="test.php"><i class="fas fa-graduation-cap"></i><span>Test Panel</span></a>
         <a href="courses.php"><i class="fas fa-university"></i><span>Courses</span></a>
-        <a href="logout.php"><i class="fas fa-sign-out-alt"></i></i><span>Logout</span></a>
+        <a href="los.php"><i class="far fa-star"></i><span>Imp LOS</span></a>
+        <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
     </div>
     <!-- Sidebar ends -->
 </body>

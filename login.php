@@ -30,6 +30,7 @@
       </div>
       <input type="submit" name="login" value="Login">
       <div class="signup_link">
+        <p>Don't Have Account?<a href="login.php"> Sign Up</a></p>
       </div>
       <div class="container-fluid">
         <?php

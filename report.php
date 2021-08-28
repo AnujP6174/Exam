@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <script language="javascript" type="text/javascript">
         window.history.forward();
     </script>
-    <title>Progress Report</title>
+    <title><?php echo($_SESSION['username']);?> Progress Report</title>
     <style>
         body {
             background: linear-gradient(120deg, #2980b9, #8e44ad);

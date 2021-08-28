@@ -24,16 +24,18 @@
                 <label>Enter Your Name</label>
             </div>
             <div class="txt_field">
-                <input type="password" name="pw" maxlength="10" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
+                <input type="text" name="pw" onkeypress="return (event.charCode > 63 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode>47 && event.charCode<58) || (event.charCode=46)" required>
                 <span></span>
-                <label>Enter Your Email-Id</label>
+                <label>Enter Your Email</label>
             </div>
             <div class="txt_field">
-                
+                <input type="tel" name="mobile_number" maxlength="10" onkeypress="return (event.charCode > 48 && event.charCode < 58)" required>
+                <span></span>
+                <label>Enter Your Mobile No.</label>
             </div>
             <input type="submit" name="login" value="SignUp">
             <div class="container my-4">
-                    
+
             </div>
         </form>
     </div>

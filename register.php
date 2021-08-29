@@ -46,15 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $register_select_class_query = "SELECT * FROM `rb_class_tb`";
                 $register_select_class_result = mysqli_query($conn, $register_select_class_query) or die(mysqli_error($conn));
                 echo "<form method='GET'>
-            <label>Select Your Class: </label>
-            <select name='register_class' id='register_class'>";
+                <label>Select Your Class: </label>
+                <select name='register_class' id='register_class'>";
                 while ($register_select_class_row = mysqli_fetch_array($register_select_class_result)) {
                     echo "<option value='$register_select_class_row[1]'>$register_select_class_row[1]</option>";
                 }
                 echo "</select></form><br>";
                 ?>
+                <br><input type="submit" name="signup" value="SignUp">
             </div>
-            <input type="submit" name="signup" value="SignUp">
             <div class="my-4"></div>
         </form>
     </div>

@@ -21,10 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <div class="center">
         <h1>Register</h1>
         <form method="post">
-            <?php
-            $register_select_class_query = "SELECT * FROM `rb_class_tb`";
-            $register_select_class_result = mysqli_query($conn, $register_select_class_query) or die(mysqli_error($conn));
-            ?>
+
             <div class="txt_field">
                 <input type="text" name="name" maxlength="40" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
                 <span></span>
@@ -46,13 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <span></span>
                 <label>Create Password(Numbers Only)</label>
             </div>
-
-            <div class="dropdown">
-                <label>Select Your Class</label>
-                <select name="register_class" id="register_class"></select>
-                <option value=""></option>
-            </div><br>
-
+            <?php
+            $register_select_class_query = "SELECT * FROM `rb_class_tb`";
+            $register_select_class_result = mysqli_query($conn, $register_select_class_query) or die(mysqli_error($conn));
+            echo "<form method='GET'>
+            <label>Select Your Class: </label>
+            <select name='register_class' id='register_class'>";
+            while ($register_select_class_row= mysqli_fetch_array($register_select_class_result)) {
+                    echo "<option value='$register_select_class_row[1]'>$register_select_class_row[1]</option>";
+                }
+                echo "</select></form><br>";
+            ?>
             <input type="submit" name="signup" value="SignUp">
             <div class="my-4"></div>
         </form>

@@ -1,3 +1,9 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    session_start();
+    $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,9 +14,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <title>RBeI Registration</title>
-    <!-- <script language="javascript" type="text/javascript">
-    window.history.forward();
-  </script> -->
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,13 +21,17 @@
     <div class="center">
         <h1>Register</h1>
         <form method="post">
+            <?php
+            $register_select_class_query = "SELECT * FROM `rb_class_tb`";
+            $register_select_class_result = mysqli_query($conn, $register_select_class_query) or die(mysqli_error($conn));
+            ?>
             <div class="txt_field">
-                <input type="text" name="un" maxlength="20" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
+                <input type="text" name="name" maxlength="40" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
                 <span></span>
                 <label>Enter Your Name</label>
             </div>
             <div class="txt_field">
-                <input type="text" name="pw" onkeypress="return (event.charCode > 63 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode>47 && event.charCode<58) || (event.charCode=46)" required>
+                <input type="text" name="email" onkeypress="return (event.charCode > 63 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode>47 && event.charCode<58) || (event.charCode=46)" required>
                 <span></span>
                 <label>Enter Your Email</label>
             </div>
@@ -33,10 +40,21 @@
                 <span></span>
                 <label>Enter Your Mobile No.</label>
             </div>
-            <input type="submit" name="login" value="SignUp">
-            <div class="container my-4">
 
+            <div class="txt_field">
+                <input type="pw" name="password" maxlength="10" onkeypress="return (event.charCode > 48 && event.charCode < 58)" required>
+                <span></span>
+                <label>Create Password(Numbers Only)</label>
             </div>
+
+            <div class="dropdown">
+                <label>Select Your Class</label>
+                <select name="register_class" id="register_class"></select>
+                <option value=""></option>
+            </div><br>
+
+            <input type="submit" name="signup" value="SignUp">
+            <div class="my-4"></div>
         </form>
     </div>
 </body>

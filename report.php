@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <script language="javascript" type="text/javascript">
         window.history.forward();
     </script>
-    <title><?php echo($_SESSION['username']);?> Progress Report</title>
+    <title><?php echo ($_SESSION['username']); ?> Progress Report</title>
     <style>
         body {
             background: linear-gradient(120deg, #2980b9, #8e44ad);
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <!-- Navbar start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
         <div class="container-fluid">
-            <h3>RBE <span>INSTITUTE</span></h3>
+            <img src="RBeI.jpg" width="90px" height="40px">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

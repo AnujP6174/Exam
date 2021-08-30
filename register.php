@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <body>
     <div class="center">
         <h1>Register</h1>
-        <form method="post">
+        <form method="post" action=''>
             <div class="txt_field">
                 <input type="text" name="name" maxlength="40" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
                 <span></span>
@@ -32,23 +32,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <label>Enter Your Email</label>
             </div>
             <div class="txt_field">
-                <input type="tel" name="mobile_number" maxlength="10" onkeypress="return (event.charCode > 48 && event.charCode < 58)" required>
+                <input type="tel" name="mobile_number" maxlength="10" onkeypress="return (event.charCode > 47 && event.charCode < 58)" required>
                 <span></span>
                 <label>Enter Your Mobile No.</label>
             </div>
             <div class="txt_field">
-                <input type="pw" name="password" maxlength="10" onkeypress="return (event.charCode > 48 && event.charCode < 58)" required>
+                <input type="password" name="password" maxlength="10" onkeypress="return (event.charCode > 48 && event.charCode < 58)" required>
                 <span></span>
                 <label>Create Password(Numbers Only)</label>
             </div>
             <div class="dropdown">
                 <?php
+                $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
                 $register_select_class_query = "SELECT * FROM `rb_class_tb`";
                 $register_select_class_result = mysqli_query($conn, $register_select_class_query) or die(mysqli_error($conn));
                 echo "<form method='GET'>
                 <label>Select Your Class: </label>
                 <select name='register_class' id='register_class'>";
-                while ($register_select_class_row = mysqli_fetch_array($register_select_class_result)) {
+                while ($register_select_class_row = mysqli_fetch_array($register_select_class_result)){
                     echo "<option value='$register_select_class_row[1]'>$register_select_class_row[1]</option>";
                 }
                 echo "</select></form><br>";
@@ -59,5 +60,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </form>
     </div>
 </body>
+<?php
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          // Creating connection for database
+          
+          $full = $_POST['name'];
+          $email = $_POST['email'];
+          $mobile = $_POST['mobile_number'];
+          $password = $_POST['password'];
+          $class_name = $_POST['register_class'];
 
+          $insert_info_db_query = "INSERT INTO rb_user_tb(name,class,mobile,email,username,password) values('$full','$class_name','$mobile','$email','$mobile','$password')";
+          $insert_info_db_query_execute = mysqli_query($conn, $insert_info_db_query) or die(mysqli_error($conn));
+          echo "<center><h1>User Registred Successfully!!</center></h1>";
+          sleep(3);
+          header("Location:login.php");
+        }
+?>
 </html>

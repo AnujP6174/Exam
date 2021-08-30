@@ -46,7 +46,7 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
             if (!isset($_SESSION['username'])) {
             }
             // else{
-            // header('Location: /internship/login.php');
+            // header('Location: login.php');
             // }
             ?>
         </center>

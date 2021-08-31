@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 echo "<form method='GET'>
                 <label>Select Your Class: </label>
                 <select name='register_class' id='register_class'>";
-                while ($register_select_class_row = mysqli_fetch_array($register_select_class_result)){
+                while ($register_select_class_row = mysqli_fetch_array($register_select_class_result)) {
                     echo "<option value='$register_select_class_row[1]'>$register_select_class_row[1]</option>";
                 }
                 echo "</select></form><br>";
@@ -59,24 +59,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="signup_link">
                 <p>Already Have An Account?<a href="Login.php"> Login</p>
             </div>
+            <div class="container-fluid">
+                <?php
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    // Creating connection for database
+
+                    $full = $_POST['name'];
+                    $email = $_POST['email'];
+                    $mobile = $_POST['mobile_number'];
+                    $password = $_POST['password'];
+                    $class_name = $_POST['register_class'];
+
+                    $insert_info_db_query = "INSERT INTO rb_user_tb(name,class,mobile,email,username,password) values('$full','$class_name','$mobile','$email','$mobile','$password')";
+                    $insert_info_db_query_execute = mysqli_query($conn, $insert_info_db_query) or die(mysqli_error($conn));
+                    echo '<div class="container-fluid alert alert-success alert-dismissible fade show" role="alert">
+                    <center><strong>You are Registered Successfully!</strong></center>
+                    </div>';
+                    sleep(2);
+                }
+                ?>
+            </div>
         </form>
     </div>
 </body>
-<?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-          // Creating connection for database
-          
-          $full = $_POST['name'];
-          $email = $_POST['email'];
-          $mobile = $_POST['mobile_number'];
-          $password = $_POST['password'];
-          $class_name = $_POST['register_class'];
 
-          $insert_info_db_query = "INSERT INTO rb_user_tb(name,class,mobile,email,username,password) values('$full','$class_name','$mobile','$email','$mobile','$password')";
-          $insert_info_db_query_execute = mysqli_query($conn, $insert_info_db_query) or die(mysqli_error($conn));
-          echo "<center><h1>User Registred Successfully!!</center></h1>";
-          sleep(3);
-          header("Location:login.php");
-        }
-?>
 </html>

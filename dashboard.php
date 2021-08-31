@@ -33,7 +33,6 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
         </label>
         <div class="left_area">
             <img src="RBeI.jpg" width="70px" height="40px">
-            <!-- <h3>RBE <span>Institute</span></h3> -->
         </div>
     </header>
     <!-- Header Area ends -->

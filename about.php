@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <script language="javascript" type="text/javascript">
         window.history.forward();
     </script>
-    <link rel="stylesheet" href="dashboard.css">
     <style>
         body {
             background: linear-gradient(120deg, #2980b9, #8e44ad);
             background-attachment: fixed;
+            font-family: Roboto,sans-serif;
         }
 
         span {
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 <body>
     <!-- Navbar start -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <img src="RBeI.jpg" width="90px" height="40px">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

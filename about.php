@@ -69,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <div class="center">
         <div class="txt_field my-4">
             <center>
-                <!-- <div class="container my-4"> -->
                 <p><b>Name:</b> <?php
                                 $un = $_SESSION['username'];
                                 $sql = "SELECT * FROM `rb_user_tb` WHERE username='$un'";

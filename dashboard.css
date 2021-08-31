@@ -104,14 +104,14 @@ label #sidebar_btn:hover{
     width: 80px;
 }
 
-/* .content{
+.content{
     margin-left: 250px;
     background: url(Material.jpg) no-repeat;
     background-position: center;
     background-size: cover;
     height: 100vh;
     transition: 0.5s;
-} */
+}
 
 #check:checked ~ .content{
     margin-left: 60px;

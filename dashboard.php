@@ -60,6 +60,8 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
         <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
     </div>
     <!-- Sidebar ends -->
+
+    <div class="content"></div>
 </body>
 
 </html>

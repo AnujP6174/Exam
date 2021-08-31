@@ -23,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <script language="javascript" type="text/javascript">
+    <!-- <script language="javascript" type="text/javascript">
         window.history.forward();
-    </script>
+    </script> -->
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <!-- Navbar start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <img src="RBeI.jpg" width="90px" height="40px">
+            <a href="https://rbeiset.com/"><img src="RBeI.jpg" width="90px" height="40px"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

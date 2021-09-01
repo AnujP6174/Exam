@@ -72,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                     $insert_info_db_query = "INSERT INTO rb_user_tb(name,class,mobile,email,username,password) values('$full','$class_name','$mobile','$email','$mobile','$password')";
                     $insert_info_db_query_execute = mysqli_query($conn, $insert_info_db_query) or die(mysqli_error($conn));
-                    // echo "<script>alert('Registration Done Successfully')</script>";
                     echo '<div class="container-fluid alert alert-success alert-dismissible fade show" role="alert">
                     <center><strong>You are Registered Successfully!</strong></center>
                     </div>';

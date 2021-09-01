@@ -32,7 +32,7 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
             <i class="fas fa-bars" id="sidebar_btn"></i>
         </label>
         <div class="left_area">
-            <img src="RBeI.jpg" width="70px" height="40px">
+            <a href="https://rbeiset.com/"><img src="RBeI.jpg" width="70px" height="40px"></a>
         </div>
     </header>
     <!-- Header Area ends -->

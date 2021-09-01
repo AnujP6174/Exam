@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a href="https://rbeiset.com/"><img src="RBeI.jpg" width="90px" height="40px"></a>
-            <!-- <img src="RBeI.jpg" width="90px" height="40px"> -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

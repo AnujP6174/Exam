@@ -12,6 +12,7 @@
     window.history.forward();
   </script>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="RBeI.jpg" type="image/x-icon">
 </head>
 
 <body>

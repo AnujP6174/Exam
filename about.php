@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         window.history.forward();
     </script> -->
     <link rel="stylesheet" href="style.css">
+    <title>About <?php echo ($_SESSION['username']);?></title>
     <style>
         body {
             background: linear-gradient(120deg, #2980b9, #8e44ad);

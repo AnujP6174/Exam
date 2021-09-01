@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <script language="javascript" type="text/javascript">
         window.history.forward();
     </script>
-    <title>Solution</title>
+    <title>Solutions</title>
     <style>
         body {
             background: linear-gradient(120deg, #2980b9, #8e44ad);

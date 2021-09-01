@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <label>Enter Your Mobile No.</label>
             </div>
             <div class="txt_field">
-                <input type="password" name="password" maxlength="10" onkeypress="return (event.charCode > 48 && event.charCode < 58)" required>
+                <input type="password" name="password" maxlength="10" onkeypress="return (event.charCode > 47 && event.charCode < 58)" required>
                 <span></span>
                 <label>Create Password(Numbers Only)</label>
             </div>
@@ -70,12 +70,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     $password = $_POST['password'];
                     $class_name = $_POST['register_class'];
 
-                    $insert_info_db_query = "INSERT INTO rb_user_tb(name,class,mobile,email,username,password) values('$full','$class_name','$mobile','$email','$mobile','$password')";
-                    $insert_info_db_query_execute = mysqli_query($conn, $insert_info_db_query) or die(mysqli_error($conn));
-                    echo '<div class="container-fluid alert alert-success alert-dismissible fade show" role="alert">
-                    <center><strong>You are Registered Successfully!</strong></center>
-                    </div>';
-                    sleep(2);
+                    $check_mobile_number_query = "SELECT mobile FROM `rb_user_tb` WHERE mobile=$mobile";
+                    $check_mobile_number_result = mysqli_query($conn, $check_mobile_number_query) or die(mysqli_error($conn));
+                    $check_mobile_number_count = mysqli_num_rows($check_mobile_number_result);
+                    // $check_mobile_number_row=mysqli_fetch_array($check_mobile_number_result);
+                    if ($check_mobile_number_count == 0) {
+                        $insert_info_db_query = "INSERT INTO rb_user_tb(name,class,mobile,email,username,password) values('$full','$class_name','$mobile','$email','$mobile','$password')";
+                        $insert_info_db_query_execute = mysqli_query($conn, $insert_info_db_query) or die(mysqli_error($conn));
+                        echo '<div class="container-fluid alert alert-success alert-dismissible fade show" role="alert">
+                        <center><strong>You are Registered Successfully!</strong></center>
+                        </div>';
+                        sleep(2);
+                    } else {
+                        echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">
+                        <center><strong>You are Already Registered!</strong></center>
+                        </div>';
+                    }
                 }
                 ?>
             </div>

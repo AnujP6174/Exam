@@ -15,7 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
     <!-- <script language="javascript" type="text/javascript">
         window.history.forward();
     </script> -->
@@ -58,8 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </nav>
     <!-- Navbar ends -->
+
+    <!-- Table start -->
+
     <div class="container my-4">
-        <table style="width:75%" class="table table-striped table-hover table-bordered">
+        <table style="width:75%" class="table table-striped table-hover table-bordered" id="myTable">
             <thead class="table table-dark">
                 <tr style="text-align:center">
                     <th>Test Name</th>
@@ -75,8 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $result = mysqli_query($conn, $sql);
             $count = mysqli_num_rows($result);
             while ($TitleRow = mysqli_fetch_array($result)) {
-                // $exam_class=$TitleRow['class'];
-                // $_SESSION['class']=$exam_class;
                 $titl = $TitleRow[1] . "_" . $TitleRow[0];
                 $IdRow = substr($titl, strpos($titl, '_', 0) + 1, strlen($titl));
                 echo '<tr class="table-primary" style="text-align:center"><td>' . "$titl" . '</td>';
@@ -86,6 +94,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ?>
         </table>
     </div>
+    <!-- Datatables javascript start -->
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
+    <!-- Datatables javascript ends -->
 </body>
 
 </html>

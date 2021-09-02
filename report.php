@@ -160,6 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         });
     </script>
     <!-- Datatables javascript ends -->
+
     <!-- Graph Starts -->
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

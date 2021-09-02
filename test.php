@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <!-- Table start -->
 
     <div class="container my-4">
-        <table style="width:75%" class="table table-striped table-hover table-bordered" id="myTable">
+        <table class="table table-striped table-hover table-bordered" id="myTable">
             <thead class="table table-dark">
                 <tr style="text-align:center">
                     <th>Test Name</th>

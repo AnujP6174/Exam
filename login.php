@@ -42,8 +42,8 @@
           $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
 
           if (!empty($_POST['login'])) {
-            $UserN = $_POST['un'];
-            $PassW = $_POST['pw'];
+            $UserN = mysqli_real_escape_string($conn, $_POST['un']);
+            $PassW = mysqli_real_escape_string($conn, $_POST['pw']);
             $query = "SELECT * FROM `rb_user_tb` WHERE username='$UserN' AND password='$PassW'";
             $result = mysqli_query($conn, $query);
             $count = mysqli_num_rows($result);

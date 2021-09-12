@@ -30,13 +30,13 @@
         <label>Password</label>
       </div>
       <div class="txt_field">
-        <input type="captcha" id="captcha" name="captcha" maxlength="10" onkeypress="return (event.charCode>47 && event.charCode<58)">
+        <input type="captcha" id="captcha" name="captcha" onkeypress="return (event.charCode>47 && event.charCode<58)" required>
         <span></span>
         <label>Enter Captcha</label>
       </div>
-      <div class="txt_field">
+      <!-- <div class="txt_field">
 
-      </div>
+      </div> -->
       <input type="submit" name="login" value="Login">
       <div class="signup_link">
         <p>Don't Have Account?<a href="register.php"> Sign Up</a></p>

@@ -34,9 +34,9 @@
         <span></span>
         <label>Enter Captcha</label>
       </div>
-      <!-- <div class="txt_field">
-
-      </div> -->
+      <div class="">
+        <img src="captcha.php">
+      </div>
       <input type="submit" name="login" value="Login">
       <div class="signup_link">
         <p>Don't Have Account?<a href="register.php"> Sign Up</a></p>

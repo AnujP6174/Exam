@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <link rel="icon" href="RBeI.jpg" type="image/x-icon">
     <style>
         body {
-            background: linear-gradient(120deg, #2980b9, #8e44ad);
-            background-attachment: fixed;
+            background-image: url("Material.jpg");
+            background-size: cover;
         }
 
         span {

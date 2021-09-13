@@ -34,7 +34,7 @@
         <span></span>
         <label>Enter Captcha</label>
       </div>
-      <div class="">
+      <div class="my-4">
         <img src="captcha.php">
       </div>
       <input type="submit" name="login" value="Login">

@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION['CODE'];
 if (!isset($_SESSION['logged'])) {
     header('Location:login.php');
 }
@@ -21,6 +20,7 @@ $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connectio
     <link rel="stylesheet" href="dashboard.css">
     <title><?php echo ($_SESSION['username']); ?>'s DashBoard</title>
     <link rel="icon" href="RBeI.jpg" type="image/x-icon">
+    <!-- Disable Back Button -->
     <!-- <script language="javascript" type="text/javascript">
         window.history.forward();
     </script> -->

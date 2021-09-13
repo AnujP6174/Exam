@@ -57,6 +57,7 @@
             $count = mysqli_num_rows($result);
             $row = mysqli_fetch_array($result);
             if ($count == 1) {
+              $_SESSION['CODE'];
               $TmpClss = $row['class'];
               $_SESSION['username'] = $UserN;
               $_SESSION['class'] = $TmpClss;
@@ -64,6 +65,7 @@
               $_SESSION['id'] = $user_id;
               header("Location:dashboard.php");
             } else {
+              $_SESSION['CODE'];
               echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">
               <center><strong>Log-In Unsuccessfull! Please Enter Valid username or password </strong></center>
               </div>';
@@ -79,10 +81,10 @@
   <script>
     function submit_data() {
       jQuery.ajax({
-        url:'dashboard.php',
-        type:'post',
+        url: 'dashboard.php',
+        type: 'post',
         data: jQuery('#frmCaptcha').serialize(),
-        success:function(data){
+        success: function(data) {
           alert(data);
         }
       });

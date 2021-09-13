@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['CODE'];
 if (!isset($_SESSION['logged'])) {
     header('Location:login.php');
 }

@@ -18,7 +18,7 @@
 <body>
   <div class="center">
     <h1>Login</h1>
-    <form method="post">
+    <form id="frmCaptcha" method="post">
       <div class="txt_field">
         <input type="text" name="un" maxlength="20" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
         <span></span>
@@ -37,7 +37,7 @@
       <div class="my-4">
         <img src="captcha.php">
       </div>
-      <input type="submit" name="login" value="Login">
+      <input type="submit" name="login" onclick="submit_data()" value="Login">
       <div class="signup_link">
         <p>Don't Have Account?<a href="register.php"> Sign Up</a></p>
       </div>
@@ -75,6 +75,19 @@
       </div>
     </form>
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function submit_data() {
+      jQuery.ajax({
+        url:'dashboard.php',
+        type:'post',
+        data: jQuery('#frmCaptcha').serialize(),
+        success:function(data){
+          alert(data);
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

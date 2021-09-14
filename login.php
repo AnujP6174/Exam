@@ -13,29 +13,30 @@
   </script>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="RBeI.jpg" type="image/x-icon">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
   <div class="center">
     <h1>Login</h1>
-    <form id="frmCaptcha" method="post">
+    <form method="post">
       <div class="txt_field">
-        <input type="text" name="un" maxlength="20" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
+        <input type="text" class="form-control" name="un" maxlength="20" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
         <span></span>
         <label>Username</label>
       </div>
       <div class="txt_field">
-        <input type="password" name="pw" maxlength="10" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
+        <input type="password" class="form-control" name="pw" maxlength="10" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32) || (event.charCode>47 && event.charCode<58)" required>
         <span></span>
         <label>Password</label>
       </div>
       <div class="txt_field">
-        <input type="captcha" id="captcha" name="captcha" onkeypress="return (event.charCode>47 && event.charCode<58)" required>
+        <input type="captcha" class="form-control" id="captcha" name="captcha" onkeypress="return (event.charCode>47 && event.charCode<58)" required>
         <span></span>
         <label>Enter Captcha</label>
       </div>
-      <div class="my-4">
-        <img src="captcha.php">
+      <div class="g-recaptcha my-4" data-sitekey="6Lcjm2QcAAAAAJIUjubU1KEnSpnBuoarqyl6i6dF">
+        <!-- <img src="captcha.php"> -->
       </div>
       <input type="submit" name="login" onclick="submit_data()" value="Login">
       <div class="signup_link">
@@ -46,7 +47,6 @@
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           session_start();
           $_SESSION['logged'] = 'yes';
-          // Creating connection for database
           $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
 
           if (!empty($_POST['login'])) {
@@ -77,7 +77,7 @@
       </div>
     </form>
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     function submit_data() {
       jQuery.ajax({
@@ -89,7 +89,7 @@
         }
       });
     }
-  </script>
+  </script> -->
 </body>
 
 </html>

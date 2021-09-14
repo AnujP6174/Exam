@@ -1,9 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION['logged'])) {
-    header('Location:login.php');
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    session_start();
+    if (!isset($_SESSION['logged'])) {
+        header('Location:login.php');
+    }
+    $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
 }
-$conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
 ?>
 
 <!DOCTYPE html>

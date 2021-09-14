@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!isset($_SESSION['logged'])) {
         header('Location:login.php');
     }
-    $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
+    $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
 }
 ?>
 <!DOCTYPE html>

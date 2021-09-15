@@ -5,7 +5,7 @@ unset($_SESSION["id"]);
 unset($_SESSION["class"]);
 session_destroy();
 session_write_close();
-header('Location: /internship/login');
+header('Location: login');
 exit();
 ?>
 <!DOCTYPE html>

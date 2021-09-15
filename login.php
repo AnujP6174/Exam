@@ -37,7 +37,7 @@
         <span></span>
         <label>Enter Captcha</label>
       </div> -->
-      <div class="g-recaptcha my-4" data-sitekey="6Lcjm2QcAAAAAJIUjubU1KEnSpnBuoarqyl6i6dF">
+      <div class="g-recaptcha my-4" data-sitekey="6Lcjm2QcAAAAAJIUjubU1KEnSpnBuoarqyl6i6dF" required>
         <!-- <img src="captcha"> -->
       </div>
       <input type="submit" name="login" onclick="submit_data()" value="Login">
@@ -78,7 +78,9 @@
               }
             }
             else{
-              echo "Please mark the captcha first!!";
+              echo "<script>
+                alert(Please enter captcha first!)
+              </script>";
             }
           }
         }

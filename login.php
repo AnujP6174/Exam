@@ -49,31 +49,33 @@
           session_start();
           $_SESSION['logged'] = 'yes';
           $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
-          // if (isset($_POST['login']) && $_POST['g-recaptcha-response'] != "" && !empty($_POST['login'])) {
-          //   $secret='6Lcjm2QcAAAAAMOmnreR1AdpDEija-zCv0W3Q7Ay';
-          // $verifyResponse=file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret);
-          // $responseData=json_decode($verifyResponse);
-          // if($responseData->)
-          $UserN = mysqli_real_escape_string($conn, $_POST['un']);
-          $PassW = mysqli_real_escape_string($conn, $_POST['pw']);
-          $query = "SELECT * FROM `rb_user_tb` WHERE username='$UserN' AND password='$PassW'";
-          $result = mysqli_query($conn, $query);
-          $count = mysqli_num_rows($result);
-          $row = mysqli_fetch_array($result);
-          if ($count == 1) {
-            $_SESSION['CODE'];
-            $TmpClss = $row['class'];
-            $_SESSION['username'] = $UserN;
-            $_SESSION['class'] = $TmpClss;
-            $user_id = $row[0];
-            $_SESSION['id'] = $user_id;
-            header("Location:dashboard");
-          } else {
-            // $_SESSION['CODE'];
-            echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">
+          if (isset($_POST['login']) && $_POST['g-recaptcha-response'] != "" && !empty($_POST['login'])) {
+            $secret = '6Lcjm2QcAAAAAMOmnreR1AdpDEija-zCv0W3Q7Ay';
+            $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
+            $responseData = json_decode($verifyResponse);
+            if ($responseData->success) {
+              $UserN = mysqli_real_escape_string($conn, $_POST['un']);
+              $PassW = mysqli_real_escape_string($conn, $_POST['pw']);
+              $query = "SELECT * FROM `rb_user_tb` WHERE username='$UserN' AND password='$PassW'";
+              $result = mysqli_query($conn, $query);
+              $count = mysqli_num_rows($result);
+              $row = mysqli_fetch_array($result);
+              if ($count == 1) {
+                $_SESSION['CODE'];
+                $TmpClss = $row['class'];
+                $_SESSION['username'] = $UserN;
+                $_SESSION['class'] = $TmpClss;
+                $user_id = $row[0];
+                $_SESSION['id'] = $user_id;
+                header("Location:dashboard");
+              } else {
+                // $_SESSION['CODE'];
+                echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">
               <center><strong>Log-In Unsuccessfull! Please Enter Valid username or password </strong></center>
               </div>';
-            echo '<div class="container-fluid"><br></div>';
+                echo '<div class="container-fluid"><br></div>';
+              }
+            }
           }
         }
         ?>

@@ -11,7 +11,3 @@ $Selecting_Chapter_Row=mysqli_fetch_array($Selecting_Chapter_Result);
 $button_query = "INSERT INTO chapter_completion_tb (user_id,Chap_name,Progress) values('$usr_id','$Selecting_Chapter_Row[0]','Done')";
 $button_result = mysqli_query($conn, $button_query) or die(mysqli_error($conn));
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-</html>

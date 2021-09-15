@@ -54,13 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             // }
             ?>
         </center>
-        <a href="report.php"><i class="fas fa-tasks"></i><span>Progress Report</span></a>
-        <a href="about.php"><i class="fas fa-info-circle"></i><span>About You</span></a>
+        <a href="report"><i class="fas fa-tasks"></i><span>Progress Report</span></a>
+        <a href="about"><i class="fas fa-info-circle"></i><span>About You</span></a>
         <a href="https://studde.com/"><i class="fas fa-video"></i><span>Lectures</span></a>
-        <a href="test.php"><i class="fas fa-graduation-cap"></i><span>Test Panel</span></a>
-        <a href="courses.php"><i class="fas fa-university"></i><span>Courses</span></a>
-        <a href="los.php"><i class="far fa-star"></i><span>Imp LOS</span></a>
-        <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        <a href="test"><i class="fas fa-graduation-cap"></i><span>Test Panel</span></a>
+        <a href="courses"><i class="fas fa-university"></i><span>Courses</span></a>
+        <a href="los"><i class="far fa-star"></i><span>Imp LOS</span></a>
+        <a href="logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
     </div>
     <!-- Sidebar ends -->
 

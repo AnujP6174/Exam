@@ -2,7 +2,7 @@
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     session_start();
     if (!isset($_SESSION['logged'])) {
-        header('Location:login.php');
+        header('Location:login');
     }
     $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
 }
@@ -48,10 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
-                <form class="d-flex" action="dashboard.php">
+                <form class="d-flex" action="dashboard">
                     <button class="btn btn-transparent" type="submit">Home</button>
                 </form>
-                <form action="logout.php">
+                <form action="logout">
                     <button class="btn btn-transparent" type="submit">Logout</button>
                 </form>
             </div>
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </center>";
     } else {
         echo "<div class='container my-4'>
-        <form action='los.php' method='GET'>
+        <form action='los' method='GET'>
         <label>Select Subject: </label>
         <select class='dropdown' id='class_dropdown' name='class_dropdown' style='width: 22%;'>";
         while ($sub_row = mysqli_fetch_array($sub_result)) {

@@ -2,7 +2,7 @@
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     session_start();
     if (!isset($_SESSION['logged'])) {
-        header('Location:login.php');
+        header('Location:login');
     }
     $conn = mysqli_connect("localhost", "root", "", "rbeitest_db");
 }
@@ -52,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
-                <form class="d-flex" action="dashboard.php">
+                <form class="d-flex" action="dashboard">
                     <button class="btn btn-transparent" type="submit">Home</button>
                 </form>
-                <form action="logout.php">
+                <form action="logout">
                     <button class="btn btn-transparent" type="submit">Logout</button>
                 </form>
             </div>
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     }
                     echo "<td>$exam_marks[$i]%</td>";
                     if ($exam_marks[$i] > 0) {
-                        echo "<td><a href='solution.php?testid=$exam_id_array[$i]'><input type='button' class='btn btn-success' id='butn' value='View Solution'></a></td></tr>";
+                        echo "<td><a href='solution?testid=$exam_id_array[$i]'><input type='button' class='btn btn-success' id='butn' value='View Solution'></a></td></tr>";
                     } else {
                         echo "<td><button class='btn btn-success disabled'>Exam Pending</button></td></tr>";
                     }

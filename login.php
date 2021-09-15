@@ -43,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label>Enter Captcha</label>
       </div> -->
       <div class="g-recaptcha my-4" data-sitekey="6Lcjm2QcAAAAAJIUjubU1KEnSpnBuoarqyl6i6dF">
-        <!-- <img src="captcha.php"> -->
+        <!-- <img src="captcha"> -->
       </div>
       <input type="submit" name="login" onclick="submit_data()" value="Login">
       <div class="signup_link">
-        <p>Don't Have Account?<a href="register.php"> Sign Up</a></p>
+        <p>Don't Have Account?<a href="register"> Sign Up</a></p>
       </div>
       <div class="container-fluid">
         <?php

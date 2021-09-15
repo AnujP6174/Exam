@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <title>RBeI Log-in</title>
+  <title>RBeI</title>
 
   <!-- <script language="javascript" type="text/javascript">
     window.history.forward();
@@ -31,6 +31,7 @@
         <span></span>
         <label>Password</label>
       </div>
+      <!-- Manual Captcha entry -->
       <!-- <div class="txt_field">
         <input type="captcha" class="form-control" id="captcha" name="captcha" onkeypress="return (event.charCode>47 && event.charCode<58)">
         <span></span>
@@ -71,10 +72,13 @@
               } else {
                 // $_SESSION['CODE'];
                 echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">
-              <center><strong>Log-In Unsuccessfull! Please Enter Valid username or password </strong></center>
-              </div>';
+                <center><strong>Log-In Unsuccessfull! Please Enter Valid username or password </strong></center>
+                </div>';
                 echo '<div class="container-fluid"><br></div>';
               }
+            }
+            else{
+              echo "Please mark the captcha first!!";
             }
           }
         }

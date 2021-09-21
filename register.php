@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <br><input type="submit" name="signup" value="SignUp">
             </div>
             <div class="signup_link">
-                <p>Already Have An Account?<a href="Login"> Login</p>
+                <p>Already Have An Account?<a href="login"> Login</p>
             </div>
             <div class="container-fluid">
                 <?php

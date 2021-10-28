@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <td>' . "$select_chapter_imp_data_row[7]" . '</td>
                         </tr>';
                 }
-                echo '</tbody></table>';
+                echo '</tbody></table></div>';
             }
         }
         echo '<script type="text/javascript">proceedBtnClick();</script>';

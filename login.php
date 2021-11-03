@@ -50,7 +50,8 @@
           session_start();
           $_SESSION['logged'] = 'yes';
           $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
-          if (isset($_POST['login']) && $_POST['g-recaptcha-response'] != "" && !empty($_POST['login'])) {
+          if (isset($_POST['login']) && $_POST['g-recaptcha-response'] != " " && !empty($_POST['login'])) {
+            // if (isset($_POST['login'])) {
             $secret = '6Lcjm2QcAAAAAMOmnreR1AdpDEija-zCv0W3Q7Ay';
             $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
             $responseData = json_decode($verifyResponse);
@@ -71,16 +72,19 @@
                 header("Location:dashboard");
               } else {
                 // $_SESSION['CODE'];
-                echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">
+                echo "<div class='container-fluid alert alert-danger alert-dismissible fade show' role='alert'>
                 <center><strong>Log-In Unsuccessfull! Please Enter Valid username or password </strong></center>
-                </div>';
+                </div>";
                 echo '<div class="container-fluid"><br></div>';
               }
-            }
-            else{
-              echo "<script>
-                alert(Please enter captcha first!)
-              </script>";
+              // } elseif (!$responseData->success) {
+              //   echo "Please Input the Captcha!!";
+            } else {
+              echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">
+                <center><strong>Log-In Unsuccessfull! Please Enter Captcha </strong></center>
+                </div>';
+              echo '<div class="container-fluid"><br></div>';
+              // echo "Heloo 'java' world";
             }
           }
         }
@@ -88,7 +92,7 @@
       </div>
     </form>
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     function submit_data() {
       jQuery.ajax({
@@ -96,11 +100,11 @@
         type: 'post',
         data: jQuery('#frmCaptcha').serialize(),
         success: function(data) {
-          alert(data);
+          // alert(data);
         }
       });
     }
-  </script>
+  </script> -->
 </body>
 
 </html>

@@ -22,6 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <link rel="stylesheet" href="dashboard.css">
     <title><?php echo ($_SESSION['username']); ?>'s DashBoard</title>
     <link rel="icon" href="RBeI.jpg" type="image/x-icon">
+    <script>
+        $(window).blur(function() {
+            alert('You are not allowed to leave page');
+            //do something else
+        });
+    </script>
     <!-- Disable Back Button -->
     <!-- <script language="javascript" type="text/javascript">
         window.history.forward();
@@ -63,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <a href="logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
     </div>
     <!-- Sidebar ends -->
-
+    
     <div class="content"></div>
 </body>
 

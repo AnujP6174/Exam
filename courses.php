@@ -239,7 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             chart.draw(data, options);
         }
     </script>
-    
+
     <!--Pie Chart Ends-->
 </body>
 

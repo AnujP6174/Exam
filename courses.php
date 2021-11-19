@@ -63,8 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sub_query = "SELECT DISTINCT subject_name FROM `rb_subject_tb` WHERE class LIKE '$course_class'";
     $sub_result = mysqli_query($conn, $sub_query) or die(mysqli_error($conn));
     $sub_count = mysqli_num_rows($sub_result);
-    if (!isset($_SESSION['class'])) {
-    }
 
     if ($sub_count == 0) {
         echo "<center>
@@ -126,19 +124,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 echo "<td>$chapter_row[4]</td></tr>";
             }
             echo '</tbody></table>';
-            // echo ' <center><input type="button" class="btn btn-success" id="view_chart_btn" value="View Detailed Chapter Completion Graph">';
-            // echo '<div id="piechart" style="width: 900px; height: 500px; display:none;"></div></center>';
+            echo ' <center><input type="button" class="btn btn-success" id="view_chart_btn" value="View Detailed Chapter Completion Graph">';
+            echo '<div id="piechart" style="width: 900px; height: 500px; display:none;"></div></center>';
+
+            //Graph necessary part
+            $total_chapters_array = array();
+            $chapters_done_array = array();
+            $chapters_notdone_array = array();
+            $chapter_progress_array = array();
+
+            //completed chapters block
+            $completed_chapters_query = "SELECT Chap_name FROM `chapter_completion_tb` WHERE user_id=$_SESSION[id] AND subject_name='$selected_subject'";
+            $completed_chapters_result = mysqli_query($conn, $completed_chapters_query) or die(mysqli_error($conn));
+            while ($completed_chapters = mysqli_fetch_array($completed_chapters_result)) {
+                //echo $completed_chapters[0];
+                array_push($chapters_done_array, $completed_chapters[0]);
+            }
+
+            //Total chapters block
+            $total_chapters_query = "SELECT Chap_name FROM `rb_chapter_tb` WHERE subject='$selected_subject'";
+            $total_chapters_query_result = mysqli_query($conn, $total_chapters_query) or die(mysqli_error($conn));
+            while ($graph_chapters = mysqli_fetch_array($total_chapters_query_result)) {
+                // echo $graph_chapters[0];
+                array_push($total_chapters_array, $graph_chapters[0]);
+                if (in_array($graph_chapters[0], $chapters_done_array)) {
+                    // echo $graph_chapters[0];
+                    array_push($chapter_progress_array, 0);
+                } else {
+                    //echo $graph_chapters[0];
+                    array_push($chapters_notdone_array, $graph_chapters[0]);
+                    array_push($chapter_progress_array, 1);
+                }
+            }
         }
         echo '<script type="text/javascript">proceedBtnClick();</script>';
     }
     ?>
+    <!-- }
+    echo '<script type="text/javascript">
+        proceedBtnClick();
+    </script>';
+    }
+    ?> -->
     <script>
         function update_status(chapter_id) {
 
             var request = new XMLHttpRequest();
             var usr_id = '<?php echo $_SESSION['id']; ?>';
             var class_name = '<?php echo $_SESSION['class']; ?>';
-            request.open("GET", "update_chapter_status?chapter=" + chapter_id + "&user_id=" + usr_id + "&class_name=" + class_name, true);
+            var selected_subject = '<?php echo $_GET['class_dropdown']; ?>';
+            request.open("GET", "update_chapter_status.php?chapter=" + chapter_id + "&user_id=" + usr_id + "&class_name=" + class_name + "&selected_subject=" + selected_subject, true);
             request.send();
 
             request.onreadystatechange = function() {
@@ -173,7 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <!--Pie Chart Starts-->
 
-    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {
             'packages': ['corechart']

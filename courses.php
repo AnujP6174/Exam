@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         });
         google.charts.setOnLoadCallback(initialize);
 
-        function initialize(){
+        function initialize() {
             $("#view_chart_btn").click(function() {
                 document.getElementById("#view_chart_btn").style.display = "none";
                 document.getElementById("#piechart").style.display = "block";
@@ -226,24 +226,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Completed','Not Completed'],
-                <?php
-                //    while($row = mysqli_fetch_array($completed_or_not_result)){
-                //         echo "['".$row["Progress"]."', ".$row["number"]."],";
-                //     }
-                ?>
-
+                ['Chapters', 'Progress'],
+                ['Done', <?php echo count($chapters_done_array); ?>],
+                ['Not Done', <?php echo count($chapters_notdone_array); ?>],
             ]);
             var options = {
-                title: 'Chapters Done vs Not Done'
+                'title': '<?php echo $_GET['class_dropdown']; ?> Chapter Progress',
+                'backgroundColor': 'transparent',
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
             chart.draw(data, options);
         }
-    </script> -->
-
+    </script>
+    
     <!--Pie Chart Ends-->
 </body>
 

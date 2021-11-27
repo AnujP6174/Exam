@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <a href="logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
     </div>
     <!-- Sidebar ends -->
-    
+
     <div class="content"></div>
 </body>
 

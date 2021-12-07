@@ -53,14 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse text-light" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
                 <form class="d-flex" action="dashboard">
-                    <button class="btn btn-transparent" type="submit">Dashboard</button>
+                    <button class="btn btn-transparent text-light" type="submit">Dashboard</button>
                 </form>
-                <form action="logout">
-                    <button class="btn btn-transparent" type="submit">Logout</button>
+                <form class="d-flex" action="logout">
+                    <button class="btn btn-transparent text-light" type="submit">Logout</button>
                 </form>
             </div>
         </div>

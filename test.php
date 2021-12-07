@@ -56,10 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
                 <form class="d-flex" action="dashboard">
-                    <button class="btn btn-transparent" type="submit">Dashboard</button>
+                    <button class="btn btn-transparent text-light" type="submit">Dashboard</button>
                 </form>
                 <form action="logout">
-                    <button class="btn btn-transparent" type="submit">Logout</button>
+                    <button class="btn btn-transparent text-light" type="submit">Logout</button>
                 </form>
             </div>
         </div>

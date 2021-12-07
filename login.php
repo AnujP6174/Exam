@@ -65,17 +65,15 @@
                     $user_id = $row[0];
                     $_SESSION['id'] = $user_id;
                     header("Location:dashboard");
+                  } else {
+                    // $_SESSION['CODE'];
+                    echo "<div class='container-fluid alert alert-danger alert-dismissible fade show' role='alert'>
+                    <center><strong>Log-In Unsuccessfull! Please Enter Valid username or password </strong></center>
+                    </div>";
+                    echo '<div class="container-fluid"><br></div>';
                   }
                 }
-              } else {
-                // $_SESSION['CODE'];
-                echo "<div class='container-fluid alert alert-danger alert-dismissible fade show' role='alert'>
-                <center><strong>Log-In Unsuccessfull! Please Enter Valid username or password </strong></center>
-                </div>";
-                echo '<div class="container-fluid"><br></div>';
               }
-              // } elseif (!$responseData->success) {
-              //   echo "Please Input the Captcha!!";
             } else {
               echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">
                 <center><strong>Log-In Unsuccessfull! Please Enter Captcha </strong></center>

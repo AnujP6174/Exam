@@ -66,13 +66,17 @@
                     $_SESSION['id'] = $user_id;
                     header("Location:dashboard");
                   } else {
-                    // $_SESSION['CODE'];
                     echo "<div class='container-fluid alert alert-danger alert-dismissible fade show' role='alert'>
                     <center><strong>Log-In Unsuccessfull! Please Enter Valid username or password </strong></center>
                     </div>";
                     echo '<div class="container-fluid"><br></div>';
                   }
                 }
+              } else {
+                echo "<div class='container-fluid alert alert-danger alert-dismissible fade show' role='alert'>
+                <center><strong>Log-In Unsuccessfull! Please Enter Valid username or password </strong></center>
+                </div>";
+                echo '<div class="container-fluid"><br></div>';
               }
             } else {
               echo '<div class="container-fluid alert alert-danger alert-dismissible fade show" role="alert">

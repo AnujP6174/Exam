@@ -31,15 +31,7 @@
         <span></span>
         <label>Password</label>
       </div>
-      <!-- Manual Captcha entry -->
-      <!-- <div class="txt_field">
-        <input type="captcha" class="form-control" id="captcha" name="captcha" onkeypress="return (event.charCode>47 && event.charCode<58)">
-        <span></span>
-        <label>Enter Captcha</label>
-      </div> -->
-      <div class="g-recaptcha my-4" data-sitekey="6Lcjm2QcAAAAAJIUjubU1KEnSpnBuoarqyl6i6dF" required>
-        <!-- <img src="captcha"> -->
-      </div>
+      <div class="g-recaptcha my-4" data-sitekey="6Lcjm2QcAAAAAJIUjubU1KEnSpnBuoarqyl6i6dF"></div>
       <input type="submit" name="login" onclick="submit_data()" value="Login">
       <div class="signup_link">
         <p>Don't Have Account?<a href="register"> Sign Up</a></p>
@@ -50,26 +42,31 @@
           session_start();
           $_SESSION['logged'] = 'yes';
           $conn = mysqli_connect("localhost", "root", "", "rbeitest_db") or die("Connection Failed");
+
           if (isset($_POST['login']) && $_POST['g-recaptcha-response'] != " " && !empty($_POST['login'])) {
-            // if (isset($_POST['login'])) {
             $secret = '6Lcjm2QcAAAAAMOmnreR1AdpDEija-zCv0W3Q7Ay';
             $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
             $responseData = json_decode($verifyResponse);
+
             if ($responseData->success) {
               $UserN = mysqli_real_escape_string($conn, $_POST['un']);
               $PassW = mysqli_real_escape_string($conn, $_POST['pw']);
-              $query = "SELECT * FROM `rb_user_tb` WHERE username='$UserN' AND password='$PassW'";
+              // $query = "SELECT * FROM `rb_user_tb` WHERE username='$UserN' AND password='$PassW'";
+              $query = "SELECT * FROM `rb_user_tb` WHERE username='$UserN'";
               $result = mysqli_query($conn, $query);
               $count = mysqli_num_rows($result);
-              $row = mysqli_fetch_array($result);
               if ($count == 1) {
-                $_SESSION['CODE'];
-                $TmpClss = $row['class'];
-                $_SESSION['username'] = $UserN;
-                $_SESSION['class'] = $TmpClss;
-                $user_id = $row[0];
-                $_SESSION['id'] = $user_id;
-                header("Location:dashboard");
+                while ($row = mysqli_fetch_assoc($result)) {
+                  if (password_verify($PassW, $row['password'])) {
+                    $_SESSION['CODE'];
+                    $TmpClss = $row['class'];
+                    $_SESSION['username'] = $UserN;
+                    $_SESSION['class'] = $TmpClss;
+                    $user_id = $row[0];
+                    $_SESSION['id'] = $user_id;
+                    header("Location:dashboard");
+                  }
+                }
               } else {
                 // $_SESSION['CODE'];
                 echo "<div class='container-fluid alert alert-danger alert-dismissible fade show' role='alert'>
@@ -84,7 +81,6 @@
                 <center><strong>Log-In Unsuccessfull! Please Enter Captcha </strong></center>
                 </div>';
               echo '<div class="container-fluid"><br></div>';
-              // echo "Heloo 'java' world";
             }
           }
         }
